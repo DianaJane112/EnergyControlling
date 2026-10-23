@@ -1,0 +1,616 @@
+export const groupTreeData = [
+  {
+    id: 'root-park',
+    label: '电子科大科技园天府园',
+    type: '根节点',
+    children: [
+      { id: 'bld-b13', label: 'B13栋', type: '物理楼栋', children: [] },
+      { id: 'bld-b15', label: 'B15栋', type: '物理楼栋', children: [] },
+      {
+        id: 'bld-b16', label: 'B16栋', type: '物理楼栋',
+        children: [
+          { id: 'sub-b16-floor', label: '分层计量', type: '分层计量', children: [] },
+        ]
+      },
+      { id: 'bld-b17', label: 'B17栋', type: '物理楼栋', children: [] },
+      { id: 'area-b1', label: '负1层地下室', type: '物理区域', children: [] },
+      { id: 'area-b2', label: '负2层地下室', type: '物理区域', children: [] },
+      { id: 'func-billing', label: '计费', type: '功能分类', children: [] },
+      { id: 'func-metering', label: '计量', type: '功能分类', children: [] },
+      { id: 'func-tou', label: '分时计费', type: '功能分类', children: [] },
+      { id: 'func-transformer', label: '变压器', type: '功能分类', children: [] },
+    ]
+  }
+]
+
+export const rechargeCustomers = [
+  { merchantNo: 'SH-001', meterId: '202309150001', merchantName: '天辰超市', balance: 156.80, paymentType: '预付费' },
+  { merchantNo: 'SH-002', meterId: '202309150042', merchantName: '科技园食堂', balance: 85.20, paymentType: '预付费' },
+  { merchantNo: 'SH-003', meterId: '202309150118', merchantName: '咖啡角', balance: 0.00, paymentType: '后付费' },
+  { merchantNo: 'SH-004', meterId: '202309150203', merchantName: '洗衣房', balance: 234.50, paymentType: '预付费' },
+  { merchantNo: 'SH-005', meterId: '202309150367', merchantName: '便利店', balance: -12.00, paymentType: '预付费' },
+  { merchantNo: 'SH-006', meterId: '202309150482', merchantName: '商业街-102', balance: 45.20, paymentType: '后付费' },
+]
+
+export const manualPaymentRecords = [
+  { id: 'MP-001', time: '2024-05-12 14:30', customer: '张伟', room: '1-1201', meterId: '202309150001', amount: '200.00', method: '现金', operator: 'Admin_Li', status: '已完成', statusType: 'success' },
+  { id: 'MP-002', time: '2024-05-12 13:00', customer: '李华', room: '2-0805', meterId: '202309150482', amount: '150.00', method: '扫码支付', operator: 'Admin_Wang', status: '已完成', statusType: 'success' },
+  { id: 'MP-003', time: '2024-05-12 11:20', customer: '王小明', room: '3-1102', meterId: '202309150591', amount: '300.00', method: 'POS机', operator: 'Admin_Li', status: '已完成', statusType: 'success' },
+  { id: 'MP-004', time: '2024-05-10 09:15', customer: '赵丽', room: '2-0301', meterId: '202309150042', amount: '500.00', method: '对公转账', operator: 'Admin_Wang', status: '已完成', statusType: 'success' },
+  { id: 'MP-005', time: '2024-05-09 16:45', customer: '孙磊', room: '1-1505', meterId: '202309150118', amount: '100.00', method: '扫码支付', operator: 'Admin_Li', status: '已完成', statusType: 'success' },
+]
+
+export const elecReports = [
+  { id: 'elec-daily', label: '用电量日报表' },
+  { id: 'elec-monthly', label: '用电量月报表' },
+  { id: 'elec-monthly-deleted', label: '用电量月报表(删除电表)' },
+  { id: 'multi-rate-daily', label: '复费率计费电量日报表' },
+  { id: 'multi-rate-summary', label: '复费率计费电量汇总表' },
+  { id: 'monthly-elec-summary', label: '月度用电量汇总表' },
+  { id: 'yearly-elec-summary', label: '年度用电量汇总表' },
+  { id: 'billing-elec-summary', label: '计费电量汇总表' },
+  { id: 'billing-elec-monthly', label: '计费电量月报表' },
+  { id: 'billing-elec-yearly', label: '计费电量年报表' },
+]
+
+// Per-report-type mock records
+const dailyRecords = [
+  { id: 'ED-001', date: '2026-05-17', merchantName: '张伟', group: 'B13栋', meterId: '202309150001', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 58.3, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 58.3 },
+  { id: 'ED-002', date: '2026-05-17', merchantName: '李娜', group: 'B13栋', meterId: '202309150042', virtualMerchantName: 'B13栋照明公摊', virtualMeterId: '202309150901', forwardActive: 42.5, reverseActive: 1.2, reverseRatio: 2.8, totalKwh: 41.3 },
+  { id: 'ED-003', date: '2026-05-17', merchantName: '王强', group: 'B15栋', meterId: '202309150118', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 81.7, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 81.7 },
+  { id: 'ED-004', date: '2026-05-17', merchantName: '赵丽', group: 'B15栋', meterId: '202309150203', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 33.1, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 33.1 },
+  { id: 'ED-005', date: '2026-05-17', merchantName: '孙磊', group: 'B16栋', meterId: '202309150367', virtualMerchantName: 'B16栋电梯公摊', virtualMeterId: '202309150902', forwardActive: 100.8, reverseActive: 5.6, reverseRatio: 5.6, totalKwh: 95.2 },
+  { id: 'ED-006', date: '2026-05-16', merchantName: '周明', group: 'B16栋', meterId: '202309150482', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 52.5, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 52.5 },
+  { id: 'ED-007', date: '2026-05-16', merchantName: '陈芳', group: 'B17栋', meterId: '192251700410', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 62.8, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 62.8 },
+  { id: 'ED-008', date: '2026-05-16', merchantName: '张伟', group: 'B13栋', meterId: '202309150001', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 69.3, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 69.3 },
+  { id: 'ED-009', date: '2026-05-15', merchantName: '李娜', group: 'B13栋', meterId: '202309150042', virtualMerchantName: 'B13栋照明公摊', virtualMeterId: '202309150901', forwardActive: 38.9, reverseActive: 0.8, reverseRatio: 2.1, totalKwh: 38.1 },
+  { id: 'ED-010', date: '2026-05-15', merchantName: '王强', group: 'B15栋', meterId: '202309150118', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 75.3, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 75.3 },
+  { id: 'ED-011', date: '2026-05-15', merchantName: '赵丽', group: 'B15栋', meterId: '202309150203', virtualMerchantName: '—', virtualMeterId: '—', forwardActive: 29.6, reverseActive: 0.0, reverseRatio: 0.0, totalKwh: 29.6 },
+  { id: 'ED-012', date: '2026-05-14', merchantName: '孙磊', group: 'B16栋', meterId: '202309150367', virtualMerchantName: 'B16栋电梯公摊', virtualMeterId: '202309150902', forwardActive: 95.4, reverseActive: 4.2, reverseRatio: 4.4, totalKwh: 91.2 },
+]
+
+const monthlyRecords = [
+  { id: 'EM-001', devType: '单相电表', group: 'B13栋', merchantName: '张伟', meterId: '202309150001', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 8.5, '05-02': 9.2, '05-03': 7.8, '05-04': 8.1, '05-05': 9.5, '05-06': 8.3, '05-07': 9.0, '05-08': 8.7, '05-09': 9.3, '05-10': 8.1, '05-11': 8.9, '05-12': 9.6, '05-13': 8.2, '05-14': 9.4, '05-15': 8.6, '05-16': 9.1, '05-17': 8.4 },
+    totalUsage: 149.7 },
+  { id: 'EM-002', devType: '三相电表', group: 'B13栋', merchantName: '李娜', meterId: '202309150042', virtualMerchantName: 'B13栋照明公摊', virtualMeterId: '202309150901',
+    dailyValues: { '05-01': 5.2, '05-02': 5.8, '05-03': 4.9, '05-04': 5.5, '05-05': 6.1, '05-06': 5.0, '05-07': 5.7, '05-08': 5.3, '05-09': 5.9, '05-10': 5.1, '05-11': 5.6, '05-12': 6.0, '05-13': 5.4, '05-14': 5.8, '05-15': 5.2, '05-16': 5.5, '05-17': 4.8 },
+    totalUsage: 92.8 },
+  { id: 'EM-003', devType: '三相电表', group: 'B15栋', merchantName: '王强', meterId: '202309150118', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 10.8, '05-02': 11.2, '05-03': 10.5, '05-04': 11.0, '05-05': 11.5, '05-06': 10.3, '05-07': 11.8, '05-08': 10.9, '05-09': 11.3, '05-10': 10.6, '05-11': 11.7, '05-12': 12.0, '05-13': 10.4, '05-14': 11.1, '05-15': 10.8, '05-16': 11.6, '05-17': 10.7 },
+    totalUsage: 188.2 },
+  { id: 'EM-004', devType: '单相电表', group: 'B15栋', merchantName: '赵丽', meterId: '202309150203', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 4.2, '05-02': 4.8, '05-03': 4.1, '05-04': 4.5, '05-05': 5.0, '05-06': 4.3, '05-07': 4.7, '05-08': 4.4, '05-09': 4.9, '05-10': 4.2, '05-11': 4.6, '05-12': 5.1, '05-13': 4.3, '05-14': 4.8, '05-15': 4.5, '05-16': 4.7, '05-17': 4.1 },
+    totalUsage: 76.2 },
+  { id: 'EM-005', devType: '三相电表', group: 'B16栋', merchantName: '孙磊', meterId: '202309150367', virtualMerchantName: 'B16栋电梯公摊', virtualMeterId: '202309150902',
+    dailyValues: { '05-01': 15.2, '05-02': 16.0, '05-03': 14.8, '05-04': 15.5, '05-05': 16.3, '05-06': 15.1, '05-07': 16.5, '05-08': 15.4, '05-09': 16.2, '05-10': 15.0, '05-11': 16.8, '05-12': 17.0, '05-13': 15.3, '05-14': 16.1, '05-15': 15.6, '05-16': 16.4, '05-17': 15.2 },
+    totalUsage: 268.4 },
+  { id: 'EM-006', devType: '单相电表', group: 'B16栋', merchantName: '周明', meterId: '202309150482', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 7.1, '05-02': 7.8, '05-03': 6.9, '05-04': 7.5, '05-05': 8.2, '05-06': 7.0, '05-07': 7.7, '05-08': 7.3, '05-09': 7.9, '05-10': 7.2, '05-11': 7.6, '05-12': 8.0, '05-13': 7.4, '05-14': 7.8, '05-15': 7.1, '05-16': 7.5, '05-17': 6.8 },
+    totalUsage: 126.8 },
+  { id: 'EM-007', devType: '三相电表', group: 'B17栋', merchantName: '陈芳', meterId: '192251700410', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 9.5, '05-02': 10.2, '05-03': 9.1, '05-04': 9.8, '05-05': 10.5, '05-06': 9.3, '05-07': 10.0, '05-08': 9.6, '05-09': 10.3, '05-10': 9.4, '05-11': 10.1, '05-12': 10.6, '05-13': 9.7, '05-14': 10.4, '05-15': 9.9, '05-16': 10.2, '05-17': 9.3 },
+    totalUsage: 168.9 },
+]
+
+const deletedMeterMonthlyRecords = [
+  { id: 'EDM-001', devType: '单相电表', group: 'B13栋', merchantName: '已迁出用户B', meterId: '202008120045', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 2.8, '05-02': 3.1, '05-03': 2.7, '05-04': 2.9, '05-05': 3.2, '05-06': 2.6, '05-07': 3.0, '05-08': 2.8, '05-09': 3.1, '05-10': 2.7, '05-11': 3.0, '05-12': 3.3, '05-13': 2.9, '05-14': 3.2, '05-15': 2.8, '05-16': 3.1, '05-17': 2.7 },
+    totalUsage: 50.1 },
+  { id: 'EDM-002', devType: '三相电表', group: 'B15栋', merchantName: '已注销商户A', meterId: '201907080112', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 4.5, '05-02': 5.0, '05-03': 4.3, '05-04': 4.8, '05-05': 5.2, '05-06': 4.6, '05-07': 5.1, '05-08': 4.7, '05-09': 5.3, '05-10': 4.9, '05-11': 5.5, '05-12': 5.7, '05-13': 4.8, '05-14': 5.4, '05-15': 5.0, '05-16': 5.6, '05-17': 4.6 },
+    totalUsage: 85.0 },
+  { id: 'EDM-003', devType: '单相电表', group: 'B16栋', merchantName: '已迁出用户C', meterId: '202008120056', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 3.2, '05-02': 3.5, '05-03': 3.0, '05-04': 3.3, '05-05': 3.6, '05-06': 3.1, '05-07': 3.4, '05-08': 3.2, '05-09': 3.5, '05-10': 3.0, '05-11': 3.3, '05-12': 3.6, '05-13': 3.1, '05-14': 3.4, '05-15': 3.2, '05-16': 3.5, '05-17': 3.0 },
+    totalUsage: 56.4 },
+]
+
+const multiRateDailyRecords = [
+  { id: 'MRD-001', date: '2026-05-17', merchantNo: 'SH-001', meterId: '202309150001', totalKwh: 58.3, totalAmt: 49.56, peakKwh: 10.2, peakAmt: 12.75, highKwh: 25.8, highAmt: 21.93, flatKwh: 14.1, flatAmt: 9.87, valleyKwh: 8.2, valleyAmt: 5.01 },
+  { id: 'MRD-002', date: '2026-05-17', merchantNo: 'SH-002', meterId: '202309150042', totalKwh: 41.3, totalAmt: 35.11, peakKwh: 7.5, peakAmt: 9.38, highKwh: 18.2, highAmt: 15.47, flatKwh: 10.0, flatAmt: 7.00, valleyKwh: 5.6, valleyAmt: 3.26 },
+  { id: 'MRD-003', date: '2026-05-17', merchantNo: 'SH-003', meterId: '202309150118', totalKwh: 81.7, totalAmt: 73.53, peakKwh: 15.8, peakAmt: 19.75, highKwh: 35.2, highAmt: 31.68, flatKwh: 20.1, flatAmt: 14.07, valleyKwh: 10.6, valleyAmt: 8.03 },
+  { id: 'MRD-004', date: '2026-05-16', merchantNo: 'SH-001', meterId: '202309150001', totalKwh: 69.3, totalAmt: 58.91, peakKwh: 13.1, peakAmt: 16.38, highKwh: 29.7, highAmt: 25.25, flatKwh: 17.3, flatAmt: 12.11, valleyKwh: 9.2, valleyAmt: 5.17 },
+  { id: 'MRD-005', date: '2026-05-16', merchantNo: 'SH-002', meterId: '202309150042', totalKwh: 38.1, totalAmt: 32.39, peakKwh: 6.8, peakAmt: 8.50, highKwh: 16.5, highAmt: 14.03, flatKwh: 9.5, flatAmt: 6.65, valleyKwh: 5.3, valleyAmt: 3.21 },
+  { id: 'MRD-006', date: '2026-05-16', merchantNo: 'SH-004', meterId: '202309150203', totalKwh: 29.6, totalAmt: 25.16, peakKwh: 5.2, peakAmt: 6.50, highKwh: 12.8, highAmt: 10.88, flatKwh: 7.5, flatAmt: 5.25, valleyKwh: 4.1, valleyAmt: 2.53 },
+  { id: 'MRD-007', date: '2026-05-15', merchantNo: 'SH-001', meterId: '202309150001', totalKwh: 64.1, totalAmt: 54.49, peakKwh: 12.5, peakAmt: 15.63, highKwh: 28.3, highAmt: 24.06, flatKwh: 15.2, flatAmt: 10.64, valleyKwh: 8.1, valleyAmt: 4.16 },
+  { id: 'MRD-008', date: '2026-05-15', merchantNo: 'SH-002', meterId: '202309150042', totalKwh: 42.5, totalAmt: 36.13, peakKwh: 8.2, peakAmt: 10.25, highKwh: 18.6, highAmt: 15.81, flatKwh: 10.4, flatAmt: 7.28, valleyKwh: 5.3, valleyAmt: 2.79 },
+  { id: 'MRD-009', date: '2026-05-15', merchantNo: 'SH-003', meterId: '202309150118', totalKwh: 75.3, totalAmt: 67.77, peakKwh: 14.2, peakAmt: 17.75, highKwh: 32.5, highAmt: 29.25, flatKwh: 18.6, flatAmt: 13.02, valleyKwh: 10.0, valleyAmt: 7.75 },
+  { id: 'MRD-010', date: '2026-05-14', merchantNo: 'SH-001', meterId: '202309150001', totalKwh: 52.5, totalAmt: 44.63, peakKwh: 9.7, peakAmt: 12.13, highKwh: 22.1, highAmt: 18.79, flatKwh: 13.5, flatAmt: 9.45, valleyKwh: 7.2, valleyAmt: 4.26 },
+  { id: 'MRD-011', date: '2026-05-14', merchantNo: 'SH-002', meterId: '202309150042', totalKwh: 33.1, totalAmt: 28.14, peakKwh: 6.3, peakAmt: 7.88, highKwh: 14.5, highAmt: 12.33, flatKwh: 8.2, flatAmt: 5.74, valleyKwh: 4.1, valleyAmt: 2.19 },
+  { id: 'MRD-012', date: '2026-05-14', merchantNo: 'SH-003', meterId: '202309150118', totalKwh: 91.2, totalAmt: 82.08, peakKwh: 17.5, peakAmt: 21.88, highKwh: 38.6, highAmt: 34.74, flatKwh: 22.8, flatAmt: 15.96, valleyKwh: 12.3, valleyAmt: 9.50 },
+  { id: 'MRD-013', date: '2026-05-13', merchantNo: 'SH-001', meterId: '202309150001', totalKwh: 47.8, totalAmt: 40.63, peakKwh: 9.2, peakAmt: 11.50, highKwh: 20.4, highAmt: 17.34, flatKwh: 11.8, flatAmt: 8.26, valleyKwh: 6.4, valleyAmt: 3.53 },
+  { id: 'MRD-014', date: '2026-05-13', merchantNo: 'SH-002', meterId: '202309150042', totalKwh: 36.5, totalAmt: 31.03, peakKwh: 7.1, peakAmt: 8.88, highKwh: 15.8, highAmt: 13.43, flatKwh: 9.0, flatAmt: 6.30, valleyKwh: 4.6, valleyAmt: 2.42 },
+  { id: 'MRD-015', date: '2026-05-13', merchantNo: 'SH-004', meterId: '202309150203', totalKwh: 25.2, totalAmt: 21.42, peakKwh: 4.8, peakAmt: 6.00, highKwh: 10.6, highAmt: 9.01, flatKwh: 6.5, flatAmt: 4.55, valleyKwh: 3.3, valleyAmt: 1.86 },
+  { id: 'MRD-016', date: '2026-05-12', merchantNo: 'SH-001', meterId: '202309150001', totalKwh: 55.6, totalAmt: 47.26, peakKwh: 10.8, peakAmt: 13.50, highKwh: 23.5, highAmt: 19.98, flatKwh: 14.2, flatAmt: 9.94, valleyKwh: 7.1, valleyAmt: 3.84 },
+  { id: 'MRD-017', date: '2026-05-12', merchantNo: 'SH-002', meterId: '202309150042', totalKwh: 39.8, totalAmt: 33.83, peakKwh: 7.8, peakAmt: 9.75, highKwh: 17.2, highAmt: 14.62, flatKwh: 9.8, flatAmt: 6.86, valleyKwh: 5.0, valleyAmt: 2.60 },
+  { id: 'MRD-018', date: '2026-05-12', merchantNo: 'SH-003', meterId: '202309150118', totalKwh: 78.5, totalAmt: 70.65, peakKwh: 15.2, peakAmt: 19.00, highKwh: 33.8, highAmt: 30.42, flatKwh: 19.5, flatAmt: 13.65, valleyKwh: 10.0, valleyAmt: 7.58 },
+]
+
+const multiRateSummaryRecords = [
+  { id: 'MRS-001', devType: '单相电表', group: 'B13栋', merchantNo: 'SH-001', meterId: '202309150001', virtualMerchantName: '—', virtualMeterId: '—', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 412.7, totalAmt: 350.80, peakKwh: 72.5, peakAmt: 90.63, highKwh: 182.4, highAmt: 155.04, flatKwh: 104.3, flatAmt: 73.01, valleyKwh: 53.5, valleyAmt: 32.12 },
+  { id: 'MRS-002', devType: '三相电表', group: 'B13栋', merchantNo: 'SH-002', meterId: '202309150042', virtualMerchantName: 'B13栋照明公摊', virtualMeterId: '202309150901', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 278.7, totalAmt: 236.90, peakKwh: 48.6, peakAmt: 60.75, highKwh: 122.3, highAmt: 103.96, flatKwh: 71.2, flatAmt: 49.84, valleyKwh: 36.6, valleyAmt: 22.35 },
+  { id: 'MRS-003', devType: '三相电表', group: 'B15栋', merchantNo: 'SH-003', meterId: '202309150118', virtualMerchantName: '—', virtualMeterId: '—', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 562.3, totalAmt: 506.07, peakKwh: 102.4, peakAmt: 128.00, highKwh: 246.5, highAmt: 221.85, flatKwh: 143.8, flatAmt: 100.66, valleyKwh: 69.6, valleyAmt: 55.56 },
+  { id: 'MRS-004', devType: '单相电表', group: 'B15栋', merchantNo: 'SH-004', meterId: '202309150203', virtualMerchantName: '—', virtualMeterId: '—', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 205.8, totalAmt: 174.93, peakKwh: 35.6, peakAmt: 44.50, highKwh: 88.7, highAmt: 75.40, flatKwh: 54.2, flatAmt: 37.94, valleyKwh: 27.3, valleyAmt: 17.09 },
+  { id: 'MRS-005', devType: '三相电表', group: 'B16栋', merchantNo: 'SH-005', meterId: '202309150367', virtualMerchantName: 'B16栋电梯公摊', virtualMeterId: '202309150902', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 698.5, totalAmt: 628.65, peakKwh: 126.8, peakAmt: 158.50, highKwh: 302.4, highAmt: 272.16, flatKwh: 178.9, flatAmt: 125.23, valleyKwh: 90.4, valleyAmt: 72.76 },
+  { id: 'MRS-006', devType: '单相电表', group: 'B16栋', merchantNo: 'SH-006', meterId: '202309150482', virtualMerchantName: '—', virtualMeterId: '—', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 318.2, totalAmt: 270.47, peakKwh: 55.3, peakAmt: 69.13, highKwh: 138.6, highAmt: 117.81, flatKwh: 82.5, flatAmt: 57.75, valleyKwh: 41.8, valleyAmt: 25.78 },
+  { id: 'MRS-007', devType: '三相电表', group: 'B17栋', merchantNo: 'SH-007', meterId: '192251700410', virtualMerchantName: '—', virtualMeterId: '—', startTime: '2026-05-01', endTime: '2026-05-17', totalKwh: 445.6, totalAmt: 401.04, peakKwh: 80.2, peakAmt: 100.25, highKwh: 193.5, highAmt: 174.15, flatKwh: 115.8, flatAmt: 81.06, valleyKwh: 56.1, valleyAmt: 45.58 },
+]
+
+const monthlyElecSummaryRecords = [
+  { id: 'MES-001', group: 'B13栋', meterId: '202309150001', merchantName: '张伟', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表', month: '2026-05',
+    forwardPrevReading: 12580.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 12850.5, forwardCurrTime: '2026-05-31', forwardUsage: 270.5,
+    reversePrevReading: 0.0, reversePrevTime: '2026-04-30', reverseCurrReading: 0.0, reverseCurrTime: '2026-05-31', reverseUsage: 0.0,
+    reverseRatio: 0.0, totalStartReading: 12580.0, totalEndReading: 12850.5, totalKwh: 270.5, prevBalance: 156.80, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-002', group: 'B13栋', meterId: '202309150042', merchantName: '李娜', virtualMeterId: '202309150901', virtualMerchantName: 'B13栋照明公摊', meterType: '三相电表', month: '2026-05',
+    forwardPrevReading: 8320.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 8495.2, forwardCurrTime: '2026-05-31', forwardUsage: 175.2,
+    reversePrevReading: 12.5, reversePrevTime: '2026-04-30', reverseCurrReading: 14.8, reverseCurrTime: '2026-05-31', reverseUsage: 2.3,
+    reverseRatio: 1.3, totalStartReading: 8307.5, totalEndReading: 8480.4, totalKwh: 172.9, prevBalance: 85.20, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-003', group: 'B15栋', meterId: '202309150118', merchantName: '王强', virtualMeterId: '—', virtualMerchantName: '—', meterType: '三相电表', month: '2026-05',
+    forwardPrevReading: 15420.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 15760.8, forwardCurrTime: '2026-05-31', forwardUsage: 340.8,
+    reversePrevReading: 0.0, reversePrevTime: '2026-04-30', reverseCurrReading: 0.0, reverseCurrTime: '2026-05-31', reverseUsage: 0.0,
+    reverseRatio: 0.0, totalStartReading: 15420.0, totalEndReading: 15760.8, totalKwh: 340.8, prevBalance: 0.00, currBalance: -45.30, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-004', group: 'B15栋', meterId: '202309150203', merchantName: '赵丽', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表', month: '2026-05',
+    forwardPrevReading: 6100.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 6245.3, forwardCurrTime: '2026-05-31', forwardUsage: 145.3,
+    reversePrevReading: 0.0, reversePrevTime: '2026-04-30', reverseCurrReading: 0.0, reverseCurrTime: '2026-05-31', reverseUsage: 0.0,
+    reverseRatio: 0.0, totalStartReading: 6100.0, totalEndReading: 6245.3, totalKwh: 145.3, prevBalance: 234.50, currBalance: 89.20, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-005', group: 'B16栋', meterId: '202309150367', merchantName: '孙磊', virtualMeterId: '202309150902', virtualMerchantName: 'B16栋电梯公摊', meterType: '三相电表', month: '2026-05',
+    forwardPrevReading: 22100.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 22580.5, forwardCurrTime: '2026-05-31', forwardUsage: 480.5,
+    reversePrevReading: 45.2, reversePrevTime: '2026-04-30', reverseCurrReading: 52.8, reverseCurrTime: '2026-05-31', reverseUsage: 7.6,
+    reverseRatio: 1.6, totalStartReading: 22054.8, totalEndReading: 22527.7, totalKwh: 472.9, prevBalance: -12.00, currBalance: -108.50, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-006', group: 'B16栋', meterId: '202309150482', merchantName: '周明', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表', month: '2026-05',
+    forwardPrevReading: 9870.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 10095.8, forwardCurrTime: '2026-05-31', forwardUsage: 225.8,
+    reversePrevReading: 0.0, reversePrevTime: '2026-04-30', reverseCurrReading: 0.0, reverseCurrTime: '2026-05-31', reverseUsage: 0.0,
+    reverseRatio: 0.0, totalStartReading: 9870.0, totalEndReading: 10095.8, totalKwh: 225.8, prevBalance: 45.20, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-007', group: 'B17栋', meterId: '192251700410', merchantName: '陈芳', virtualMeterId: '—', virtualMerchantName: '—', meterType: '三相电表', month: '2026-05',
+    forwardPrevReading: 7650.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 7890.2, forwardCurrTime: '2026-05-31', forwardUsage: 240.2,
+    reversePrevReading: 8.3, reversePrevTime: '2026-04-30', reverseCurrReading: 10.1, reverseCurrTime: '2026-05-31', reverseUsage: 1.8,
+    reverseRatio: 0.7, totalStartReading: 7641.7, totalEndReading: 7880.1, totalKwh: 238.4, prevBalance: 320.00, currBalance: 150.50, updateTime: '2026-06-01 02:15' },
+  { id: 'MES-008', group: 'B17栋', meterId: '202309150598', merchantName: '吴杰', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表', month: '2026-05',
+    forwardPrevReading: 5420.0, forwardPrevTime: '2026-04-30', forwardCurrReading: 5580.6, forwardCurrTime: '2026-05-31', forwardUsage: 160.6,
+    reversePrevReading: 0.0, reversePrevTime: '2026-04-30', reverseCurrReading: 0.0, reverseCurrTime: '2026-05-31', reverseUsage: 0.0,
+    reverseRatio: 0.0, totalStartReading: 5420.0, totalEndReading: 5580.6, totalKwh: 160.6, prevBalance: 0.00, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+]
+
+const yearlyElecSummaryRecords = [
+  { id: 'YES-001', year: '2026', merchantName: '张伟', meterId: '202309150001', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表',
+    m01: 245.2, m02: 218.5, m03: 260.8, m04: 270.5, m05: 280.3, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 1275.3 },
+  { id: 'YES-002', year: '2026', merchantName: '李娜', meterId: '202309150042', virtualMeterId: '202309150901', virtualMerchantName: 'B13栋照明公摊', meterType: '三相电表',
+    m01: 158.6, m02: 142.3, m03: 168.5, m04: 175.2, m05: 172.9, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 817.5 },
+  { id: 'YES-003', year: '2026', merchantName: '王强', meterId: '202309150118', virtualMeterId: '—', virtualMerchantName: '—', meterType: '三相电表',
+    m01: 310.5, m02: 285.8, m03: 325.2, m04: 340.8, m05: 350.6, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 1612.9 },
+  { id: 'YES-004', year: '2026', merchantName: '赵丽', meterId: '202309150203', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表',
+    m01: 128.5, m02: 115.2, m03: 138.6, m04: 145.3, m05: 140.8, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 668.4 },
+  { id: 'YES-005', year: '2026', merchantName: '孙磊', meterId: '202309150367', virtualMeterId: '202309150902', virtualMerchantName: 'B16栋电梯公摊', meterType: '三相电表',
+    m01: 435.8, m02: 398.5, m03: 455.2, m04: 480.5, m05: 472.9, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 2242.9 },
+  { id: 'YES-006', year: '2026', merchantName: '周明', meterId: '202309150482', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表',
+    m01: 205.3, m02: 182.6, m03: 215.8, m04: 225.8, m05: 220.5, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 1050.0 },
+  { id: 'YES-007', year: '2026', merchantName: '陈芳', meterId: '192251700410', virtualMeterId: '—', virtualMerchantName: '—', meterType: '三相电表',
+    m01: 218.5, m02: 195.2, m03: 228.6, m04: 240.2, m05: 238.4, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 1120.9 },
+  { id: 'YES-008', year: '2026', merchantName: '吴杰', meterId: '202309150598', virtualMeterId: '—', virtualMerchantName: '—', meterType: '单相电表',
+    m01: 142.6, m02: 128.5, m03: 152.3, m04: 160.6, m05: 155.8, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 739.8 },
+]
+
+const billingElecSummaryRecords = [
+  { id: 'BES-001', merchantName: '张伟', meterId: '202309150001', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 350.80, billingKwh: 412.7, avgPrice: 0.85 },
+  { id: 'BES-002', merchantName: '李娜', meterId: '202309150042', virtualMeterId: '202309150901', virtualMerchantName: 'B13栋照明公摊', billingAmt: 236.90, billingKwh: 278.7, avgPrice: 0.85 },
+  { id: 'BES-003', merchantName: '王强', meterId: '202309150118', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 506.07, billingKwh: 562.3, avgPrice: 0.90 },
+  { id: 'BES-004', merchantName: '赵丽', meterId: '202309150203', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 174.93, billingKwh: 205.8, avgPrice: 0.85 },
+  { id: 'BES-005', merchantName: '孙磊', meterId: '202309150367', virtualMeterId: '202309150902', virtualMerchantName: 'B16栋电梯公摊', billingAmt: 628.65, billingKwh: 698.5, avgPrice: 0.90 },
+  { id: 'BES-006', merchantName: '周明', meterId: '202309150482', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 270.47, billingKwh: 318.2, avgPrice: 0.85 },
+  { id: 'BES-007', merchantName: '陈芳', meterId: '192251700410', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 401.04, billingKwh: 445.6, avgPrice: 0.90 },
+  { id: 'BES-008', merchantName: '吴杰', meterId: '202309150598', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 152.45, billingKwh: 179.3, avgPrice: 0.85 },
+]
+
+const billingElecMonthlyRecords = [
+  { id: 'BEM-001', devType: '单相电表', group: 'B13栋', merchantName: '张伟', meterId: '202309150001', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { kwh: 7.85, amt: 6.67 }, '05-02': { kwh: 8.12, amt: 6.90 }, '05-03': { kwh: 7.56, amt: 6.43 }, '05-04': { kwh: 8.30, amt: 7.06 }, '05-05': { kwh: 8.75, amt: 7.44 }, '05-06': { kwh: 7.92, amt: 6.73 }, '05-07': { kwh: 8.45, amt: 7.18 }, '05-08': { kwh: 8.10, amt: 6.89 }, '05-09': { kwh: 8.68, amt: 7.38 }, '05-10': { kwh: 7.78, amt: 6.61 }, '05-11': { kwh: 8.25, amt: 7.01 }, '05-12': { kwh: 8.90, amt: 7.57 }, '05-13': { kwh: 7.65, amt: 6.50 }, '05-14': { kwh: 8.55, amt: 7.27 }, '05-15': { kwh: 8.05, amt: 6.84 }, '05-16': { kwh: 8.42, amt: 7.16 }, '05-17': { kwh: 7.95, amt: 6.76 } },
+    summaryKwh: 139.28, summaryAmt: 118.39 },
+  { id: 'BEM-002', devType: '三相电表', group: 'B13栋', merchantName: '李娜', meterId: '202309150042', virtualMerchantName: 'B13栋照明公摊', virtualMeterId: '202309150901',
+    dailyValues: { '05-01': { kwh: 5.20, amt: 4.42 }, '05-02': { kwh: 5.45, amt: 4.63 }, '05-03': { kwh: 4.85, amt: 4.12 }, '05-04': { kwh: 5.60, amt: 4.76 }, '05-05': { kwh: 5.90, amt: 5.02 }, '05-06': { kwh: 5.10, amt: 4.34 }, '05-07': { kwh: 5.70, amt: 4.85 }, '05-08': { kwh: 5.30, amt: 4.51 }, '05-09': { kwh: 5.85, amt: 4.97 }, '05-10': { kwh: 5.05, amt: 4.29 }, '05-11': { kwh: 5.55, amt: 4.72 }, '05-12': { kwh: 5.95, amt: 5.06 }, '05-13': { kwh: 5.15, amt: 4.38 }, '05-14': { kwh: 5.75, amt: 4.89 }, '05-15': { kwh: 5.35, amt: 4.55 }, '05-16': { kwh: 5.65, amt: 4.80 }, '05-17': { kwh: 4.95, amt: 4.21 } },
+    summaryKwh: 92.35, summaryAmt: 78.52 },
+  { id: 'BEM-003', devType: '三相电表', group: 'B15栋', merchantName: '王强', meterId: '202309150118', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { kwh: 10.50, amt: 9.45 }, '05-02': { kwh: 11.20, amt: 10.08 }, '05-03': { kwh: 9.85, amt: 8.87 }, '05-04': { kwh: 11.50, amt: 10.35 }, '05-05': { kwh: 12.10, amt: 10.89 }, '05-06': { kwh: 10.30, amt: 9.27 }, '05-07': { kwh: 11.80, amt: 10.62 }, '05-08': { kwh: 10.90, amt: 9.81 }, '05-09': { kwh: 11.45, amt: 10.31 }, '05-10': { kwh: 10.60, amt: 9.54 }, '05-11': { kwh: 11.75, amt: 10.58 }, '05-12': { kwh: 12.30, amt: 11.07 }, '05-13': { kwh: 10.25, amt: 9.23 }, '05-14': { kwh: 11.55, amt: 10.40 }, '05-15': { kwh: 10.80, amt: 9.72 }, '05-16': { kwh: 11.60, amt: 10.44 }, '05-17': { kwh: 10.45, amt: 9.41 } },
+    summaryKwh: 188.90, summaryAmt: 170.04 },
+  { id: 'BEM-004', devType: '单相电表', group: 'B15栋', merchantName: '赵丽', meterId: '202309150203', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { kwh: 4.15, amt: 3.53 }, '05-02': { kwh: 4.38, amt: 3.72 }, '05-03': { kwh: 3.85, amt: 3.27 }, '05-04': { kwh: 4.50, amt: 3.83 }, '05-05': { kwh: 4.72, amt: 4.01 }, '05-06': { kwh: 4.10, amt: 3.49 }, '05-07': { kwh: 4.55, amt: 3.87 }, '05-08': { kwh: 4.25, amt: 3.61 }, '05-09': { kwh: 4.68, amt: 3.98 }, '05-10': { kwh: 4.05, amt: 3.44 }, '05-11': { kwh: 4.42, amt: 3.76 }, '05-12': { kwh: 4.80, amt: 4.08 }, '05-13': { kwh: 4.12, amt: 3.50 }, '05-14': { kwh: 4.58, amt: 3.89 }, '05-15': { kwh: 4.28, amt: 3.64 }, '05-16': { kwh: 4.52, amt: 3.84 }, '05-17': { kwh: 3.95, amt: 3.36 } },
+    summaryKwh: 74.90, summaryAmt: 63.72 },
+  { id: 'BEM-005', devType: '三相电表', group: 'B16栋', merchantName: '孙磊', meterId: '202309150367', virtualMerchantName: 'B16栋电梯公摊', virtualMeterId: '202309150902',
+    dailyValues: { '05-01': { kwh: 14.80, amt: 13.32 }, '05-02': { kwh: 15.50, amt: 13.95 }, '05-03': { kwh: 14.20, amt: 12.78 }, '05-04': { kwh: 15.80, amt: 14.22 }, '05-05': { kwh: 16.20, amt: 14.58 }, '05-06': { kwh: 14.60, amt: 13.14 }, '05-07': { kwh: 16.00, amt: 14.40 }, '05-08': { kwh: 15.10, amt: 13.59 }, '05-09': { kwh: 15.90, amt: 14.31 }, '05-10': { kwh: 14.50, amt: 13.05 }, '05-11': { kwh: 16.40, amt: 14.76 }, '05-12': { kwh: 16.80, amt: 15.12 }, '05-13': { kwh: 14.40, amt: 12.96 }, '05-14': { kwh: 15.70, amt: 14.13 }, '05-15': { kwh: 14.90, amt: 13.41 }, '05-16': { kwh: 15.60, amt: 14.04 }, '05-17': { kwh: 14.30, amt: 12.87 } },
+    summaryKwh: 260.60, summaryAmt: 234.63 },
+  { id: 'BEM-006', devType: '单相电表', group: 'B16栋', merchantName: '周明', meterId: '202309150482', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { kwh: 6.85, amt: 5.82 }, '05-02': { kwh: 7.20, amt: 6.12 }, '05-03': { kwh: 6.50, amt: 5.53 }, '05-04': { kwh: 7.35, amt: 6.25 }, '05-05': { kwh: 7.65, amt: 6.50 }, '05-06': { kwh: 6.70, amt: 5.70 }, '05-07': { kwh: 7.45, amt: 6.33 }, '05-08': { kwh: 7.00, amt: 5.95 }, '05-09': { kwh: 7.55, amt: 6.42 }, '05-10': { kwh: 6.95, amt: 5.91 }, '05-11': { kwh: 7.30, amt: 6.21 }, '05-12': { kwh: 7.70, amt: 6.55 }, '05-13': { kwh: 6.60, amt: 5.61 }, '05-14': { kwh: 7.40, amt: 6.29 }, '05-15': { kwh: 7.05, amt: 5.99 }, '05-16': { kwh: 7.35, amt: 6.25 }, '05-17': { kwh: 6.75, amt: 5.74 } },
+    summaryKwh: 122.35, summaryAmt: 104.07 },
+]
+
+const billingElecYearlyRecords = [
+  { id: 'BEY-001', merchantName: '张伟', meterId: '202309150001', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 4210.50, yearlyKwh: 4953.5,
+    monthly: { '01': { amt: 350.80, kwh: 412.7, currBalance: 1250.30, prevBalance: 1600.50 }, '02': { amt: 320.45, kwh: 377.0, currBalance: 930.85, prevBalance: 1250.30 }, '03': { amt: 385.20, kwh: 453.2, currBalance: 545.65, prevBalance: 930.85 }, '04': { amt: 298.60, kwh: 351.3, currBalance: 247.05, prevBalance: 545.65 }, '05': { amt: 405.30, kwh: 476.8, currBalance: -158.25, prevBalance: 247.05 }, '06': { amt: 356.70, kwh: 419.6, currBalance: -514.95, prevBalance: -158.25 }, '07': { amt: 378.50, kwh: 445.3, currBalance: -893.45, prevBalance: -514.95 }, '08': { amt: 412.80, kwh: 485.6, currBalance: -1306.25, prevBalance: -893.45 }, '09': { amt: 335.20, kwh: 394.4, currBalance: -1641.45, prevBalance: -1306.25 }, '10': { amt: 298.75, kwh: 351.5, currBalance: -1940.20, prevBalance: -1641.45 }, '11': { amt: 354.60, kwh: 417.2, currBalance: -2294.80, prevBalance: -1940.20 }, '12': { amt: 313.60, kwh: 368.9, currBalance: -2608.40, prevBalance: -2294.80 } } },
+  { id: 'BEY-002', merchantName: '李娜', meterId: '202309150042', virtualMeterId: '202309150901', virtualMerchantName: 'B13栋照明公摊',
+    yearlyAmt: 3048.72, yearlyKwh: 3586.7,
+    monthly: { '01': { amt: 236.90, kwh: 278.7, currBalance: 890.60, prevBalance: 1127.50 }, '02': { amt: 245.30, kwh: 288.6, currBalance: 645.30, prevBalance: 890.60 }, '03': { amt: 260.80, kwh: 306.8, currBalance: 384.50, prevBalance: 645.30 }, '04': { amt: 228.45, kwh: 268.8, currBalance: 156.05, prevBalance: 384.50 }, '05': { amt: 275.60, kwh: 324.2, currBalance: -119.55, prevBalance: 156.05 }, '06': { amt: 242.10, kwh: 284.8, currBalance: -361.65, prevBalance: -119.55 }, '07': { amt: 258.30, kwh: 303.9, currBalance: -619.95, prevBalance: -361.65 }, '08': { amt: 280.50, kwh: 330.0, currBalance: -900.45, prevBalance: -619.95 }, '09': { amt: 235.80, kwh: 277.4, currBalance: -1136.25, prevBalance: -900.45 }, '10': { amt: 250.40, kwh: 294.6, currBalance: -1386.65, prevBalance: -1136.25 }, '11': { amt: 268.90, kwh: 316.4, currBalance: -1655.55, prevBalance: -1386.65 }, '12': { amt: 265.67, kwh: 312.5, currBalance: -1921.22, prevBalance: -1655.55 } } },
+  { id: 'BEY-003', merchantName: '王强', meterId: '202309150118', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 6348.84, yearlyKwh: 7054.3,
+    monthly: { '01': { amt: 506.07, kwh: 562.3, currBalance: 1850.40, prevBalance: 2356.47 }, '02': { amt: 520.30, kwh: 578.1, currBalance: 1330.10, prevBalance: 1850.40 }, '03': { amt: 545.80, kwh: 606.4, currBalance: 784.30, prevBalance: 1330.10 }, '04': { amt: 490.25, kwh: 544.7, currBalance: 294.05, prevBalance: 784.30 }, '05': { amt: 568.40, kwh: 631.6, currBalance: -274.35, prevBalance: 294.05 }, '06': { amt: 535.60, kwh: 595.1, currBalance: -809.95, prevBalance: -274.35 }, '07': { amt: 555.20, kwh: 616.9, currBalance: -1365.15, prevBalance: -809.95 }, '08': { amt: 580.45, kwh: 644.9, currBalance: -1945.60, prevBalance: -1365.15 }, '09': { amt: 510.30, kwh: 567.0, currBalance: -2455.90, prevBalance: -1945.60 }, '10': { amt: 495.80, kwh: 550.9, currBalance: -2951.70, prevBalance: -2455.90 }, '11': { amt: 542.60, kwh: 602.9, currBalance: -3494.30, prevBalance: -2951.70 }, '12': { amt: 498.07, kwh: 553.5, currBalance: -3992.37, prevBalance: -3494.30 } } },
+  { id: 'BEY-004', merchantName: '赵丽', meterId: '202309150203', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 2178.36, yearlyKwh: 2562.8,
+    monthly: { '01': { amt: 174.93, kwh: 205.8, currBalance: 680.25, prevBalance: 855.18 }, '02': { amt: 165.40, kwh: 194.6, currBalance: 514.85, prevBalance: 680.25 }, '03': { amt: 188.60, kwh: 221.9, currBalance: 326.25, prevBalance: 514.85 }, '04': { amt: 158.75, kwh: 186.8, currBalance: 167.50, prevBalance: 326.25 }, '05': { amt: 195.30, kwh: 229.8, currBalance: -27.80, prevBalance: 167.50 }, '06': { amt: 172.50, kwh: 202.9, currBalance: -200.30, prevBalance: -27.80 }, '07': { amt: 185.80, kwh: 218.6, currBalance: -386.10, prevBalance: -200.30 }, '08': { amt: 198.20, kwh: 233.2, currBalance: -584.30, prevBalance: -386.10 }, '09': { amt: 168.45, kwh: 198.2, currBalance: -752.75, prevBalance: -584.30 }, '10': { amt: 175.30, kwh: 206.2, currBalance: -928.05, prevBalance: -752.75 }, '11': { amt: 190.60, kwh: 224.2, currBalance: -1118.65, prevBalance: -928.05 }, '12': { amt: 204.53, kwh: 240.6, currBalance: -1323.18, prevBalance: -1118.65 } } },
+  { id: 'BEY-005', merchantName: '孙磊', meterId: '202309150367', virtualMeterId: '202309150902', virtualMerchantName: 'B16栋电梯公摊',
+    yearlyAmt: 7870.20, yearlyKwh: 8744.7,
+    monthly: { '01': { amt: 628.65, kwh: 698.5, currBalance: 2340.80, prevBalance: 2969.45 }, '02': { amt: 645.30, kwh: 717.0, currBalance: 1695.50, prevBalance: 2340.80 }, '03': { amt: 680.45, kwh: 756.1, currBalance: 1015.05, prevBalance: 1695.50 }, '04': { amt: 610.80, kwh: 678.7, currBalance: 404.25, prevBalance: 1015.05 }, '05': { amt: 702.30, kwh: 780.3, currBalance: -298.05, prevBalance: 404.25 }, '06': { amt: 665.40, kwh: 739.3, currBalance: -963.45, prevBalance: -298.05 }, '07': { amt: 690.20, kwh: 766.9, currBalance: -1653.65, prevBalance: -963.45 }, '08': { amt: 720.50, kwh: 800.6, currBalance: -2374.15, prevBalance: -1653.65 }, '09': { amt: 635.80, kwh: 706.4, currBalance: -3009.95, prevBalance: -2374.15 }, '10': { amt: 618.40, kwh: 687.1, currBalance: -3628.35, prevBalance: -3009.95 }, '11': { amt: 672.30, kwh: 747.0, currBalance: -4300.65, prevBalance: -3628.35 }, '12': { amt: 600.10, kwh: 666.8, currBalance: -4900.75, prevBalance: -4300.65 } } },
+  { id: 'BEY-006', merchantName: '周明', meterId: '202309150482', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 3358.92, yearlyKwh: 3951.7,
+    monthly: { '01': { amt: 270.47, kwh: 318.2, currBalance: 980.50, prevBalance: 1250.97 }, '02': { amt: 258.30, kwh: 303.9, currBalance: 722.20, prevBalance: 980.50 }, '03': { amt: 285.60, kwh: 336.0, currBalance: 436.60, prevBalance: 722.20 }, '04': { amt: 248.90, kwh: 292.8, currBalance: 187.70, prevBalance: 436.60 }, '05': { amt: 298.40, kwh: 351.1, currBalance: -110.70, prevBalance: 187.70 }, '06': { amt: 265.70, kwh: 312.6, currBalance: -376.40, prevBalance: -110.70 }, '07': { amt: 288.30, kwh: 339.2, currBalance: -664.70, prevBalance: -376.40 }, '08': { amt: 305.20, kwh: 359.1, currBalance: -969.90, prevBalance: -664.70 }, '09': { amt: 270.80, kwh: 318.6, currBalance: -1240.70, prevBalance: -969.90 }, '10': { amt: 280.50, kwh: 330.0, currBalance: -1521.20, prevBalance: -1240.70 }, '11': { amt: 295.60, kwh: 347.8, currBalance: -1816.80, prevBalance: -1521.20 }, '12': { amt: 291.15, kwh: 342.5, currBalance: -2107.95, prevBalance: -1816.80 } } },
+  { id: 'BEY-007', merchantName: '陈芳', meterId: '192251700410', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 4987.44, yearlyKwh: 5541.6,
+    monthly: { '01': { amt: 401.04, kwh: 445.6, currBalance: 1580.30, prevBalance: 1981.34 }, '02': { amt: 385.60, kwh: 428.4, currBalance: 1194.70, prevBalance: 1580.30 }, '03': { amt: 420.30, kwh: 467.0, currBalance: 774.40, prevBalance: 1194.70 }, '04': { amt: 365.80, kwh: 406.4, currBalance: 408.60, prevBalance: 774.40 }, '05': { amt: 445.20, kwh: 494.7, currBalance: -36.60, prevBalance: 408.60 }, '06': { amt: 398.50, kwh: 442.8, currBalance: -435.10, prevBalance: -36.60 }, '07': { amt: 425.80, kwh: 473.1, currBalance: -860.90, prevBalance: -435.10 }, '08': { amt: 450.60, kwh: 500.7, currBalance: -1311.50, prevBalance: -860.90 }, '09': { amt: 390.40, kwh: 433.8, currBalance: -1701.90, prevBalance: -1311.50 }, '10': { amt: 410.20, kwh: 455.8, currBalance: -2112.10, prevBalance: -1701.90 }, '11': { amt: 438.90, kwh: 487.7, currBalance: -2551.00, prevBalance: -2112.10 }, '12': { amt: 255.10, kwh: 305.6, currBalance: -2806.10, prevBalance: -2551.00 } } },
+  { id: 'BEY-008', merchantName: '吴杰', meterId: '202309150598', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 1906.56, yearlyKwh: 2243.0,
+    monthly: { '01': { amt: 152.45, kwh: 179.3, currBalance: 560.80, prevBalance: 713.25 }, '02': { amt: 148.30, kwh: 174.5, currBalance: 412.50, prevBalance: 560.80 }, '03': { amt: 165.20, kwh: 194.4, currBalance: 247.30, prevBalance: 412.50 }, '04': { amt: 140.60, kwh: 165.4, currBalance: 106.70, prevBalance: 247.30 }, '05': { amt: 172.80, kwh: 203.3, currBalance: -66.10, prevBalance: 106.70 }, '06': { amt: 155.40, kwh: 182.8, currBalance: -221.50, prevBalance: -66.10 }, '07': { amt: 168.50, kwh: 198.2, currBalance: -390.00, prevBalance: -221.50 }, '08': { amt: 178.20, kwh: 209.6, currBalance: -568.20, prevBalance: -390.00 }, '09': { amt: 152.80, kwh: 179.8, currBalance: -721.00, prevBalance: -568.20 }, '10': { amt: 160.30, kwh: 188.6, currBalance: -881.30, prevBalance: -721.00 }, '11': { amt: 175.60, kwh: 206.6, currBalance: -1056.90, prevBalance: -881.30 }, '12': { amt: 136.41, kwh: 160.5, currBalance: -1193.31, prevBalance: -1056.90 } } },
+]
+
+export const reportTypeData = {
+  'elec-daily': {
+    columns: [
+      { key: 'date', label: '日期', width: 'w-[100px]' },
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]' },
+      { key: 'group', label: '分组', width: 'w-[80px]' },
+      { key: 'meterId', label: '表号', width: 'w-[130px]' },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[130px]' },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]' },
+      { key: 'forwardActive', label: '正向有功(kWh)', width: 'w-[120px]', align: 'right' },
+      { key: 'reverseActive', label: '反向有功(kWh)', width: 'w-[120px]', align: 'right' },
+      { key: 'reverseRatio', label: '反向占比(%)', width: 'w-[110px]', align: 'right' },
+      { key: 'totalKwh', label: '总电量(kWh)', width: 'w-[110px]', align: 'right' },
+    ],
+    records: dailyRecords,
+  },
+  'elec-monthly': {
+    columns: [
+      { key: 'devType', label: '设备类型', width: 'w-[90px]' },
+      { key: 'group', label: '分组', width: 'w-[80px]' },
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]' },
+      { key: 'meterId', label: '表号', width: 'w-[130px]' },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[130px]' },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]' },
+      // dynamic date columns inserted here
+      { key: 'totalUsage', label: '总用量', width: 'w-[100px]', align: 'right' },
+    ],
+    dateColumn: true, // marker: date columns generated from filter date range
+    records: monthlyRecords,
+  },
+  'elec-monthly-deleted': {
+    columns: [
+      { key: 'devType', label: '设备类型', width: 'w-[90px]' },
+      { key: 'group', label: '分组', width: 'w-[80px]' },
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]' },
+      { key: 'meterId', label: '表号', width: 'w-[130px]' },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[130px]' },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]' },
+      // dynamic date columns inserted here
+      { key: 'totalUsage', label: '总用量', width: 'w-[100px]', align: 'right' },
+    ],
+    dateColumn: true,
+    records: deletedMeterMonthlyRecords,
+  },
+  'multi-rate-daily': {
+    columns: [
+      { key: 'merchantNo', label: '商户号', width: 'w-[90px]', sortable: true },
+      { key: 'meterId', label: '表号', width: 'w-[130px]', sortable: true },
+      { key: 'date', label: '日期', width: 'w-[100px]', sortable: true },
+      { key: 'totalKwh', label: '总电量(kWh)', width: 'w-[110px]', align: 'right', sortable: true },
+      { key: 'totalAmt', label: '总电费(¥)', width: 'w-[110px]', align: 'right', sortable: true },
+      { key: 'peakKwh', label: '尖电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'peakAmt', label: '尖电费(¥)', width: 'w-[105px]', align: 'right' },
+      { key: 'highKwh', label: '峰电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'highAmt', label: '峰电费(¥)', width: 'w-[105px]', align: 'right' },
+      { key: 'flatKwh', label: '平电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'flatAmt', label: '平电费(¥)', width: 'w-[105px]', align: 'right' },
+      { key: 'valleyKwh', label: '谷电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'valleyAmt', label: '谷电费(¥)', width: 'w-[105px]', align: 'right' },
+    ],
+    hasChart: true,
+    records: multiRateDailyRecords,
+  },
+  'multi-rate-summary': {
+    columns: [
+      { key: 'devType', label: '设备类型', width: 'w-[90px]' },
+      { key: 'group', label: '分组', width: 'w-[80px]' },
+      { key: 'merchantNo', label: '商户号', width: 'w-[90px]', sortable: true },
+      { key: 'meterId', label: '表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMerchantName', label: '虚拟商户名', width: 'w-[120px]', sortable: true },
+      { key: 'virtualMeterId', label: '虚拟电表号', width: 'w-[130px]', sortable: true },
+      { key: 'startTime', label: '开始时间', width: 'w-[105px]' },
+      { key: 'endTime', label: '结束时间', width: 'w-[105px]' },
+      { key: 'totalKwh', label: '总电量(kWh)', width: 'w-[110px]', align: 'right' },
+      { key: 'totalAmt', label: '总电费(¥)', width: 'w-[110px]', align: 'right' },
+      { key: 'peakKwh', label: '尖电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'peakAmt', label: '尖电费(¥)', width: 'w-[105px]', align: 'right' },
+      { key: 'highKwh', label: '峰电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'highAmt', label: '峰电费(¥)', width: 'w-[105px]', align: 'right' },
+      { key: 'flatKwh', label: '平电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'flatAmt', label: '平电费(¥)', width: 'w-[105px]', align: 'right' },
+      { key: 'valleyKwh', label: '谷电量(kWh)', width: 'w-[105px]', align: 'right' },
+      { key: 'valleyAmt', label: '谷电费(¥)', width: 'w-[105px]', align: 'right' },
+    ],
+    hasChart: true,
+    records: multiRateSummaryRecords,
+  },
+  'monthly-elec-summary': {
+    columns: [
+      { key: 'group', label: '分组', width: 'w-[80px]', sortable: true },
+      { key: 'meterId', label: '表号', width: 'w-[130px]', sortable: true },
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]', sortable: true },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[120px]', sortable: true },
+      { key: 'meterType', label: '表计类型', width: 'w-[90px]' },
+      { key: 'month', label: '月度', width: 'w-[85px]' },
+      // 正向有功电量 sub-columns
+      { key: 'forwardPrevReading', label: '上期示数', width: 'w-[105px]', align: 'right', parent: '正向有功电量' },
+      { key: 'forwardPrevTime', label: '上期时间', width: 'w-[105px]', parent: '正向有功电量' },
+      { key: 'forwardCurrReading', label: '本期示数', width: 'w-[105px]', align: 'right', parent: '正向有功电量' },
+      { key: 'forwardCurrTime', label: '本期时间', width: 'w-[105px]', parent: '正向有功电量' },
+      { key: 'forwardUsage', label: '用量', width: 'w-[95px]', align: 'right', parent: '正向有功电量' },
+      // 反向有功电量 sub-columns
+      { key: 'reversePrevReading', label: '上期示数', width: 'w-[105px]', align: 'right', parent: '反向有功电量' },
+      { key: 'reversePrevTime', label: '上期时间', width: 'w-[105px]', parent: '反向有功电量' },
+      { key: 'reverseCurrReading', label: '本期示数', width: 'w-[105px]', align: 'right', parent: '反向有功电量' },
+      { key: 'reverseCurrTime', label: '本期时间', width: 'w-[105px]', parent: '反向有功电量' },
+      { key: 'reverseUsage', label: '用量', width: 'w-[95px]', align: 'right', parent: '反向有功电量' },
+      { key: 'reverseRatio', label: '反向占比(%)', width: 'w-[105px]', align: 'right' },
+      // 总起止示数 sub-columns
+      { key: 'totalStartReading', label: '总起示数', width: 'w-[105px]', align: 'right', parent: '总起止示数' },
+      { key: 'totalEndReading', label: '总止示数', width: 'w-[105px]', align: 'right', parent: '总起止示数' },
+      { key: 'totalKwh', label: '总电量', width: 'w-[100px]', align: 'right' },
+      { key: 'prevBalance', label: '上期余额', width: 'w-[100px]', align: 'right' },
+      { key: 'currBalance', label: '本期余额', width: 'w-[100px]', align: 'right' },
+      { key: 'updateTime', label: '数据更新时间', width: 'w-[145px]' },
+    ],
+    multiHeader: true,
+    records: monthlyElecSummaryRecords,
+  },
+  'yearly-elec-summary': {
+    columns: [
+      { key: 'year', label: '年度', width: 'w-[75px]' },
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]', sortable: true },
+      { key: 'meterId', label: '表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[120px]', sortable: true },
+      { key: 'meterType', label: '表计类型', width: 'w-[90px]' },
+      { key: 'm01', label: '1月', width: 'w-[80px]', align: 'right' },
+      { key: 'm02', label: '2月', width: 'w-[80px]', align: 'right' },
+      { key: 'm03', label: '3月', width: 'w-[80px]', align: 'right' },
+      { key: 'm04', label: '4月', width: 'w-[80px]', align: 'right' },
+      { key: 'm05', label: '5月', width: 'w-[80px]', align: 'right' },
+      { key: 'm06', label: '6月', width: 'w-[80px]', align: 'right' },
+      { key: 'm07', label: '7月', width: 'w-[80px]', align: 'right' },
+      { key: 'm08', label: '8月', width: 'w-[80px]', align: 'right' },
+      { key: 'm09', label: '9月', width: 'w-[80px]', align: 'right' },
+      { key: 'm10', label: '10月', width: 'w-[80px]', align: 'right' },
+      { key: 'm11', label: '11月', width: 'w-[80px]', align: 'right' },
+      { key: 'm12', label: '12月', width: 'w-[80px]', align: 'right' },
+      { key: 'subtotal', label: '小计', width: 'w-[90px]', align: 'right' },
+    ],
+    records: yearlyElecSummaryRecords,
+  },
+  'billing-elec-summary': {
+    columns: [
+      { key: 'period', label: '汇总周期', width: 'w-[180px]' },
+      { key: 'billingType', label: '计费类型', width: 'w-[110px]' },
+      { key: 'totalKwh', label: '总电量(kWh)', width: 'w-[120px]', align: 'right' },
+      { key: 'totalAmt', label: '总金额(¥)', width: 'w-[120px]', align: 'right' },
+      { key: 'meterCount', label: '电表数', width: 'w-[80px]', align: 'right' },
+      { key: 'householdCount', label: '户数', width: 'w-[80px]', align: 'right' },
+    ],
+    records: billingElecSummaryRecords,
+  },
+  'billing-elec-monthly': {
+    columns: [
+      { key: 'devType', label: '设备类型', width: 'w-[90px]' },
+      { key: 'group', label: '分组', width: 'w-[80px]' },
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]', sortable: true },
+      { key: 'meterId', label: '表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[120px]' },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]' },
+      // dynamic date columns (colspan 2 each: 总电量, 总费用)
+      { key: 'summaryKwh', label: '总电量', width: 'w-[100px]', align: 'right', summary: true },
+      { key: 'summaryAmt', label: '总费用', width: 'w-[100px]', align: 'right', summary: true },
+    ],
+    dateColumn: true,
+    dateSubCols: 2,
+    records: billingElecMonthlyRecords,
+  },
+  'billing-elec-yearly': {
+    columns: [
+      { key: 'merchantName', label: '商户名', width: 'w-[90px]', sortable: true },
+      { key: 'meterId', label: '表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMeterId', label: '虚拟表号', width: 'w-[130px]', sortable: true },
+      { key: 'virtualMerchantName', label: '虚拟表商户名', width: 'w-[120px]', sortable: true },
+      { key: 'yearlyAmt', label: '年计费金额', width: 'w-[115px]', align: 'right' },
+      { key: 'yearlyKwh', label: '年计费电量', width: 'w-[115px]', align: 'right' },
+    ],
+    records: billingElecYearlyRecords,
+  },
+}
+
+export const waterRechargeCustomers = [
+  { merchantNo: 'WS-001', meterId: 'WS202309150010', merchantName: '天辰洗浴中心', balance: 256.80, paymentType: '预付费' },
+  { merchantNo: 'WS-002', meterId: 'WS202309150025', merchantName: '科技园食堂(水)', balance: 125.50, paymentType: '预付费' },
+  { merchantNo: 'WS-003', meterId: 'WS202309150038', merchantName: '洗衣房(水)', balance: 0.00, paymentType: '后付费' },
+  { merchantNo: 'WS-004', meterId: 'WS202309150052', merchantName: '商业街-105', balance: 380.20, paymentType: '预付费' },
+  { merchantNo: 'WS-005', meterId: 'WS202309150067', merchantName: '游泳馆', balance: -25.00, paymentType: '预付费' },
+  { merchantNo: 'WS-006', meterId: 'WS202309150081', merchantName: '健身房(水)', balance: 68.50, paymentType: '后付费' },
+]
+
+export const waterMonthlyReportSummary = {
+  totalMeters: 6,
+  totalUsage: 405.2,
+}
+
+export const waterDeletedMeterReportRecords = [
+  { id: 'WDM-001', date: '2026-05-17', group: 'B13栋', meterId: 'WS202008120010', merchantName: '已迁出用户A', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 3.2, forwardTotal: 985.6 },
+  { id: 'WDM-002', date: '2026-05-17', group: 'B15栋', meterId: 'WS201907080025', merchantName: '已注销商户B', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 4.8, forwardTotal: 1230.5 },
+  { id: 'WDM-003', date: '2026-05-17', group: 'B16栋', meterId: 'WS202008120038', merchantName: '已迁出用户C', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', dailyUsage: 5.5, forwardTotal: 1520.3 },
+  { id: 'WDM-004', date: '2026-05-16', group: 'B13栋', meterId: 'WS202008120010', merchantName: '已迁出用户A', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 2.8, forwardTotal: 982.4 },
+  { id: 'WDM-005', date: '2026-05-16', group: 'B15栋', meterId: 'WS201907080025', merchantName: '已注销商户B', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 4.2, forwardTotal: 1225.7 },
+  { id: 'WDM-006', date: '2026-05-16', group: 'B16栋', meterId: 'WS202008120038', merchantName: '已迁出用户C', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', dailyUsage: 5.0, forwardTotal: 1514.8 },
+  { id: 'WDM-007', date: '2026-05-15', group: 'B13栋', meterId: 'WS202008120010', merchantName: '已迁出用户A', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 3.0, forwardTotal: 979.6 },
+  { id: 'WDM-008', date: '2026-05-15', group: 'B15栋', meterId: 'WS201907080025', merchantName: '已注销商户B', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 4.5, forwardTotal: 1221.5 },
+]
+
+export const waterYearlySummaryStats = {
+  totalMeters: 6,
+  totalUsage: 1280.4,
+}
+
+export const waterYearlySummaryRecords = [
+  { id: 'WYS-001', year: '2026', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN15水表',
+    m01: 195.2, m02: 178.5, m03: 210.8, m04: 225.3, m05: 207.1, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 1016.9 },
+  { id: 'WYS-002', year: '2026', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901', meterType: 'DN20水表',
+    m01: 128.6, m02: 115.3, m03: 138.5, m04: 142.8, m05: 137.3, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 662.5 },
+  { id: 'WYS-003', year: '2026', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN25水表',
+    m01: 280.5, m02: 255.8, m03: 305.2, m04: 318.6, m05: 301.6, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 1461.7 },
+  { id: 'WYS-004', year: '2026', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN15水表',
+    m01: 88.5, m02: 75.2, m03: 92.6, m04: 95.3, m05: 94.9, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 446.5 },
+  { id: 'WYS-005', year: '2026', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', meterType: 'DN32水表',
+    m01: 395.8, m02: 358.5, m03: 425.2, m04: 440.5, m05: 419.7, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 2039.7 },
+  { id: 'WYS-006', year: '2026', merchantName: '健身房(水)', meterId: 'WS202309150081', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN20水表',
+    m01: 108.5, m02: 95.2, m03: 115.8, m04: 120.6, m05: 119.8, m06: 0, m07: 0, m08: 0, m09: 0, m10: 0, m11: 0, m12: 0, subtotal: 559.9 },
+]
+
+export const waterMonthlySummaryStats = {
+  totalMeters: 6,
+  totalUsage: 405.2,
+}
+
+export const waterMonthlySummaryRecords = [
+  { id: 'WMS-001', group: 'B13栋', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN15水表', month: '2026-05',
+    prevReading: 3635.2, prevTime: '2026-04-30', currReading: 3842.3, currTime: '2026-05-31', usage: 207.1,
+    totalStartReading: 3635.2, totalEndReading: 3842.3, totalUsage: 207.1, prevBalance: 256.80, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+  { id: 'WMS-002', group: 'B13栋', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901', meterType: 'DN20水表', month: '2026-05',
+    prevReading: 2373.4, prevTime: '2026-04-30', currReading: 2510.7, currTime: '2026-05-31', usage: 137.3,
+    totalStartReading: 2373.4, totalEndReading: 2510.7, totalUsage: 137.3, prevBalance: 125.50, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+  { id: 'WMS-003', group: 'B15栋', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN25水表', month: '2026-05',
+    prevReading: 5328.5, prevTime: '2026-04-30', currReading: 5630.1, currTime: '2026-05-31', usage: 301.6,
+    totalStartReading: 5328.5, totalEndReading: 5630.1, totalUsage: 301.6, prevBalance: 0.00, currBalance: -45.30, updateTime: '2026-06-01 02:15' },
+  { id: 'WMS-004', group: 'B15栋', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN15水表', month: '2026-05',
+    prevReading: 1725.6, prevTime: '2026-04-30', currReading: 1820.5, currTime: '2026-05-31', usage: 94.9,
+    totalStartReading: 1725.6, totalEndReading: 1820.5, totalUsage: 94.9, prevBalance: 380.20, currBalance: 285.30, updateTime: '2026-06-01 02:15' },
+  { id: 'WMS-005', group: 'B16栋', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', meterType: 'DN32水表', month: '2026-05',
+    prevReading: 7471.1, prevTime: '2026-04-30', currReading: 7890.8, currTime: '2026-05-31', usage: 419.7,
+    totalStartReading: 7471.1, totalEndReading: 7890.8, totalUsage: 419.7, prevBalance: -25.00, currBalance: -128.50, updateTime: '2026-06-01 02:15' },
+  { id: 'WMS-006', group: 'B16栋', merchantName: '健身房(水)', meterId: 'WS202309150081', virtualMerchantName: '—', virtualMeterId: '—', meterType: 'DN20水表', month: '2026-05',
+    prevReading: 1520.6, prevTime: '2026-04-30', currReading: 1640.4, currTime: '2026-05-31', usage: 119.8,
+    totalStartReading: 1520.6, totalEndReading: 1640.4, totalUsage: 119.8, prevBalance: 68.50, currBalance: 0.00, updateTime: '2026-06-01 02:15' },
+]
+
+export const waterMonthlyReportRecords = [
+  { id: 'WM-001', month: '2026-05', devType: 'DN15水表', group: 'B13栋', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 11.8, '05-02': 12.5, '05-03': 11.2, '05-04': 12.0, '05-05': 13.1, '05-06': 11.5, '05-07': 12.8, '05-08': 12.3, '05-09': 11.9, '05-10': 12.6, '05-11': 13.0, '05-12': 12.4, '05-13': 11.7, '05-14': 12.9, '05-15': 13.1, '05-16': 11.8, '05-17': 12.5 },
+    totalUsage: 207.1 },
+  { id: 'WM-002', month: '2026-05', devType: 'DN20水表', group: 'B13栋', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901',
+    dailyValues: { '05-01': 7.8, '05-02': 8.2, '05-03': 7.5, '05-04': 8.0, '05-05': 8.5, '05-06': 7.6, '05-07': 8.3, '05-08': 7.9, '05-09': 8.1, '05-10': 7.7, '05-11': 8.4, '05-12': 8.6, '05-13': 7.8, '05-14': 8.2, '05-15': 8.5, '05-16': 7.9, '05-17': 8.3 },
+    totalUsage: 137.3 },
+  { id: 'WM-003', month: '2026-05', devType: 'DN25水表', group: 'B15栋', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 17.5, '05-02': 18.2, '05-03': 16.8, '05-04': 17.9, '05-05': 18.6, '05-06': 17.2, '05-07': 18.0, '05-08': 17.6, '05-09': 18.3, '05-10': 17.1, '05-11': 17.8, '05-12': 18.5, '05-13': 17.4, '05-14': 18.1, '05-15': 16.8, '05-16': 17.2, '05-17': 18.6 },
+    totalUsage: 301.6 },
+  { id: 'WM-004', month: '2026-05', devType: 'DN15水表', group: 'B15栋', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 5.5, '05-02': 5.8, '05-03': 5.2, '05-04': 5.6, '05-05': 6.0, '05-06': 5.3, '05-07': 5.7, '05-08': 5.4, '05-09': 5.9, '05-10': 5.1, '05-11': 5.5, '05-12': 5.8, '05-13': 5.3, '05-14': 5.6, '05-15': 5.2, '05-16': 5.8, '05-17': 6.2 },
+    totalUsage: 94.9 },
+  { id: 'WM-005', month: '2026-05', devType: 'DN32水表', group: 'B16栋', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902',
+    dailyValues: { '05-01': 24.5, '05-02': 25.8, '05-03': 23.6, '05-04': 24.9, '05-05': 26.2, '05-06': 24.1, '05-07': 25.5, '05-08': 24.8, '05-09': 25.2, '05-10': 24.3, '05-11': 25.0, '05-12': 26.0, '05-13': 24.6, '05-14': 25.4, '05-15': 24.5, '05-16': 23.9, '05-17': 25.4 },
+    totalUsage: 419.7 },
+  { id: 'WM-006', month: '2026-05', devType: 'DN20水表', group: 'B16栋', merchantName: '健身房(水)', meterId: 'WS202309150081', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': 6.8, '05-02': 7.2, '05-03': 6.5, '05-04': 7.0, '05-05': 7.5, '05-06': 6.6, '05-07': 7.3, '05-08': 6.9, '05-09': 7.1, '05-10': 6.7, '05-11': 7.4, '05-12': 7.6, '05-13': 6.8, '05-14': 7.2, '05-15': 6.9, '05-16': 7.0, '05-17': 7.3 },
+    totalUsage: 119.8 },
+]
+
+export const waterDailyReportRecords = [
+  { id: 'WD-001', date: '2026-05-17', group: 'B13栋', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 12.5, forwardTotal: 3842.3 },
+  { id: 'WD-002', date: '2026-05-17', group: 'B13栋', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901', dailyUsage: 8.3, forwardTotal: 2510.7 },
+  { id: 'WD-003', date: '2026-05-17', group: 'B15栋', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 18.6, forwardTotal: 5630.1 },
+  { id: 'WD-004', date: '2026-05-17', group: 'B15栋', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 6.2, forwardTotal: 1820.5 },
+  { id: 'WD-005', date: '2026-05-17', group: 'B16栋', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', dailyUsage: 25.4, forwardTotal: 7890.8 },
+  { id: 'WD-006', date: '2026-05-16', group: 'B13栋', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 11.8, forwardTotal: 3829.8 },
+  { id: 'WD-007', date: '2026-05-16', group: 'B13栋', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901', dailyUsage: 7.9, forwardTotal: 2502.4 },
+  { id: 'WD-008', date: '2026-05-16', group: 'B15栋', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 17.2, forwardTotal: 5611.5 },
+  { id: 'WD-009', date: '2026-05-16', group: 'B15栋', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 5.8, forwardTotal: 1814.3 },
+  { id: 'WD-010', date: '2026-05-16', group: 'B16栋', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', dailyUsage: 23.9, forwardTotal: 7865.4 },
+  { id: 'WD-011', date: '2026-05-15', group: 'B13栋', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 13.1, forwardTotal: 3818.0 },
+  { id: 'WD-012', date: '2026-05-15', group: 'B13栋', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901', dailyUsage: 8.5, forwardTotal: 2494.5 },
+  { id: 'WD-013', date: '2026-05-15', group: 'B15栋', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—', dailyUsage: 16.8, forwardTotal: 5594.3 },
+  { id: 'WD-014', date: '2026-05-15', group: 'B16栋', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902', dailyUsage: 24.5, forwardTotal: 7841.5 },
+]
+
+export const waterManualPaymentRecords = [
+  { id: 'WMP-001', time: '2024-05-12 15:10', customer: '天辰洗浴中心', room: '1-0101', meterId: 'WS202309150010', amount: '300.00', method: '现金', operator: 'Admin_Li', status: '已完成' },
+  { id: 'WMP-002', time: '2024-05-12 11:30', customer: '科技园食堂(水)', room: '1-0203', meterId: 'WS202309150025', amount: '200.00', method: '扫码支付', operator: 'Admin_Wang', status: '已完成' },
+  { id: 'WMP-003', time: '2024-05-11 16:45', customer: '洗衣房(水)', room: '2-0508', meterId: 'WS202309150038', amount: '150.00', method: 'POS机', operator: 'Admin_Li', status: '已完成' },
+  { id: 'WMP-004', time: '2024-05-10 09:20', customer: '商业街-105', room: '3-0802', meterId: 'WS202309150052', amount: '500.00', method: '对公转账', operator: 'Admin_Wang', status: '已完成' },
+  { id: 'WMP-005', time: '2024-05-09 14:30', customer: '游泳馆', room: 'B1-001', meterId: 'WS202309150067', amount: '100.00', method: '扫码支付', operator: 'Admin_Li', status: '已完成' },
+]
+
+export const billingWaterSummaryRecords = [
+  { id: 'BWS-001', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 2850.60, billingUsage: 518.3, avgPrice: 5.50 },
+  { id: 'BWS-002', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMeterId: 'WS202309150901', virtualMerchantName: 'B13栋公摊水费', billingAmt: 1925.35, billingUsage: 385.1, avgPrice: 5.00 },
+  { id: 'BWS-003', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 3124.08, billingUsage: 520.7, avgPrice: 6.00 },
+  { id: 'BWS-004', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 1486.65, billingUsage: 297.3, avgPrice: 5.00 },
+  { id: 'BWS-005', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMeterId: 'WS202309150902', virtualMerchantName: 'B16栋公摊水费', billingAmt: 5230.75, billingUsage: 872.0, avgPrice: 6.00 },
+  { id: 'BWS-006', merchantName: '健身房(水)', meterId: 'WS202309150081', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 2138.52, billingUsage: 427.7, avgPrice: 5.00 },
+  { id: 'BWS-007', merchantName: '天辰超市(水)', meterId: 'WS201807200201', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 1675.60, billingUsage: 304.7, avgPrice: 5.50 },
+  { id: 'BWS-008', merchantName: '咖啡角(水)', meterId: 'WS201807200315', virtualMeterId: '—', virtualMerchantName: '—', billingAmt: 980.45, billingUsage: 178.3, avgPrice: 5.50 },
+]
+
+export const billingWaterMonthlyRecords = [
+  { id: 'BWM-001', devType: '冷水表', group: 'B13栋', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { usage: 10.05, amt: 55.28 }, '05-02': { usage: 11.20, amt: 61.60 }, '05-03': { usage: 9.85, amt: 54.18 }, '05-04': { usage: 12.30, amt: 67.65 }, '05-05': { usage: 13.45, amt: 73.98 }, '05-06': { usage: 10.80, amt: 59.40 }, '05-07': { usage: 11.65, amt: 64.08 }, '05-08': { usage: 12.10, amt: 66.55 }, '05-09': { usage: 10.50, amt: 57.75 }, '05-10': { usage: 11.85, amt: 65.18 }, '05-11': { usage: 13.20, amt: 72.60 }, '05-12': { usage: 12.55, amt: 69.03 }, '05-13': { usage: 10.30, amt: 56.65 }, '05-14': { usage: 11.40, amt: 62.70 }, '05-15': { usage: 12.80, amt: 70.40 }, '05-16': { usage: 10.95, amt: 60.23 }, '05-17': { usage: 11.50, amt: 63.25 } },
+    summaryUsage: 196.40, summaryAmt: 1080.51 },
+  { id: 'BWM-002', devType: '冷水表', group: 'B13栋', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMerchantName: 'B13栋公摊水费', virtualMeterId: 'WS202309150901',
+    dailyValues: { '05-01': { usage: 7.20, amt: 36.00 }, '05-02': { usage: 7.85, amt: 39.25 }, '05-03': { usage: 6.50, amt: 32.50 }, '05-04': { usage: 8.10, amt: 40.50 }, '05-05': { usage: 8.95, amt: 44.75 }, '05-06': { usage: 7.30, amt: 36.50 }, '05-07': { usage: 7.90, amt: 39.50 }, '05-08': { usage: 8.20, amt: 41.00 }, '05-09': { usage: 7.05, amt: 35.25 }, '05-10': { usage: 8.40, amt: 42.00 }, '05-11': { usage: 8.65, amt: 43.25 }, '05-12': { usage: 8.15, amt: 40.75 }, '05-13': { usage: 6.80, amt: 34.00 }, '05-14': { usage: 7.75, amt: 38.75 }, '05-15': { usage: 8.50, amt: 42.50 }, '05-16': { usage: 7.50, amt: 37.50 }, '05-17': { usage: 7.60, amt: 38.00 } },
+    summaryUsage: 132.40, summaryAmt: 662.00 },
+  { id: 'BWM-003', devType: '热水表', group: 'B15栋', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { usage: 12.30, amt: 73.80 }, '05-02': { usage: 14.50, amt: 87.00 }, '05-03': { usage: 11.20, amt: 67.20 }, '05-04': { usage: 15.80, amt: 94.80 }, '05-05': { usage: 16.40, amt: 98.40 }, '05-06': { usage: 13.10, amt: 78.60 }, '05-07': { usage: 15.20, amt: 91.20 }, '05-08': { usage: 14.80, amt: 88.80 }, '05-09': { usage: 12.60, amt: 75.60 }, '05-10': { usage: 16.00, amt: 96.00 }, '05-11': { usage: 17.20, amt: 103.20 }, '05-12': { usage: 15.50, amt: 93.00 }, '05-13': { usage: 12.90, amt: 77.40 }, '05-14': { usage: 14.20, amt: 85.20 }, '05-15': { usage: 16.80, amt: 100.80 }, '05-16': { usage: 13.70, amt: 82.20 }, '05-17': { usage: 14.50, amt: 87.00 } },
+    summaryUsage: 246.70, summaryAmt: 1480.20 },
+  { id: 'BWM-004', devType: '冷水表', group: 'B15栋', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { usage: 5.80, amt: 29.00 }, '05-02': { usage: 6.20, amt: 31.00 }, '05-03': { usage: 5.50, amt: 27.50 }, '05-04': { usage: 6.50, amt: 32.50 }, '05-05': { usage: 6.80, amt: 34.00 }, '05-06': { usage: 5.90, amt: 29.50 }, '05-07': { usage: 6.30, amt: 31.50 }, '05-08': { usage: 6.10, amt: 30.50 }, '05-09': { usage: 5.70, amt: 28.50 }, '05-10': { usage: 6.40, amt: 32.00 }, '05-11': { usage: 6.60, amt: 33.00 }, '05-12': { usage: 6.25, amt: 31.25 }, '05-13': { usage: 5.85, amt: 29.25 }, '05-14': { usage: 6.15, amt: 30.75 }, '05-15': { usage: 6.50, amt: 32.50 }, '05-16': { usage: 5.95, amt: 29.75 }, '05-17': { usage: 6.05, amt: 30.25 } },
+    summaryUsage: 104.55, summaryAmt: 522.75 },
+  { id: 'BWM-005', devType: '热水表', group: 'B16栋', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMerchantName: 'B16栋公摊水费', virtualMeterId: 'WS202309150902',
+    dailyValues: { '05-01': { usage: 18.50, amt: 111.00 }, '05-02': { usage: 20.30, amt: 121.80 }, '05-03': { usage: 17.80, amt: 106.80 }, '05-04': { usage: 21.50, amt: 129.00 }, '05-05': { usage: 22.40, amt: 134.40 }, '05-06': { usage: 19.20, amt: 115.20 }, '05-07': { usage: 20.80, amt: 124.80 }, '05-08': { usage: 19.60, amt: 117.60 }, '05-09': { usage: 18.90, amt: 113.40 }, '05-10': { usage: 21.20, amt: 127.20 }, '05-11': { usage: 23.50, amt: 141.00 }, '05-12': { usage: 22.10, amt: 132.60 }, '05-13': { usage: 19.80, amt: 118.80 }, '05-14': { usage: 20.50, amt: 123.00 }, '05-15': { usage: 24.50, amt: 147.00 }, '05-16': { usage: 21.30, amt: 127.80 }, '05-17': { usage: 20.00, amt: 120.00 } },
+    summaryUsage: 351.90, summaryAmt: 2111.40 },
+  { id: 'BWM-006', devType: '冷水表', group: 'B16栋', merchantName: '健身房(水)', meterId: 'WS202309150081', virtualMerchantName: '—', virtualMeterId: '—',
+    dailyValues: { '05-01': { usage: 8.40, amt: 42.00 }, '05-02': { usage: 9.10, amt: 45.50 }, '05-03': { usage: 7.80, amt: 39.00 }, '05-04': { usage: 9.50, amt: 47.50 }, '05-05': { usage: 10.20, amt: 51.00 }, '05-06': { usage: 8.60, amt: 43.00 }, '05-07': { usage: 9.30, amt: 46.50 }, '05-08': { usage: 8.90, amt: 44.50 }, '05-09': { usage: 8.20, amt: 41.00 }, '05-10': { usage: 9.70, amt: 48.50 }, '05-11': { usage: 10.50, amt: 52.50 }, '05-12': { usage: 9.40, amt: 47.00 }, '05-13': { usage: 8.10, amt: 40.50 }, '05-14': { usage: 9.60, amt: 48.00 }, '05-15': { usage: 10.00, amt: 50.00 }, '05-16': { usage: 9.20, amt: 46.00 }, '05-17': { usage: 8.70, amt: 43.50 } },
+    summaryUsage: 157.20, summaryAmt: 786.00 },
+]
+
+export const billingWaterYearlyRecords = [
+  { id: 'BWY-001', merchantName: '天辰洗浴中心', meterId: 'WS202309150010', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 2850.60, yearlyUsage: 518.3,
+    monthly: { '01': { amt: 230.50, usage: 41.9, currBalance: 1850.30, prevBalance: 2080.80 }, '02': { amt: 215.80, usage: 39.2, currBalance: 1634.50, prevBalance: 1850.30 }, '03': { amt: 248.60, usage: 45.2, currBalance: 1385.90, prevBalance: 1634.50 }, '04': { amt: 220.30, usage: 40.1, currBalance: 1165.60, prevBalance: 1385.90 }, '05': { amt: 265.40, usage: 48.3, currBalance: 900.20, prevBalance: 1165.60 }, '06': { amt: 235.70, usage: 42.9, currBalance: 664.50, prevBalance: 900.20 }, '07': { amt: 250.80, usage: 45.6, currBalance: 413.70, prevBalance: 664.50 }, '08': { amt: 275.20, usage: 50.0, currBalance: 138.50, prevBalance: 413.70 }, '09': { amt: 228.40, usage: 41.5, currBalance: -89.90, prevBalance: 138.50 }, '10': { amt: 210.90, usage: 38.3, currBalance: -300.80, prevBalance: -89.90 }, '11': { amt: 242.30, usage: 44.1, currBalance: -543.10, prevBalance: -300.80 }, '12': { amt: 226.70, usage: 41.2, currBalance: -769.80, prevBalance: -543.10 } } },
+  { id: 'BWY-002', merchantName: '科技园食堂(水)', meterId: 'WS202309150025', virtualMeterId: 'WS202309150901', virtualMerchantName: 'B13栋公摊水费',
+    yearlyAmt: 1925.35, yearlyUsage: 385.1,
+    monthly: { '01': { amt: 158.20, usage: 31.6, currBalance: 1240.60, prevBalance: 1398.80 }, '02': { amt: 150.40, usage: 30.1, currBalance: 1090.20, prevBalance: 1240.60 }, '03': { amt: 165.80, usage: 33.2, currBalance: 924.40, prevBalance: 1090.20 }, '04': { amt: 148.90, usage: 29.8, currBalance: 775.50, prevBalance: 924.40 }, '05': { amt: 172.30, usage: 34.5, currBalance: 603.20, prevBalance: 775.50 }, '06': { amt: 160.50, usage: 32.1, currBalance: 442.70, prevBalance: 603.20 }, '07': { amt: 168.40, usage: 33.7, currBalance: 274.30, prevBalance: 442.70 }, '08': { amt: 182.60, usage: 36.5, currBalance: 91.70, prevBalance: 274.30 }, '09': { amt: 155.30, usage: 31.1, currBalance: -63.60, prevBalance: 91.70 }, '10': { amt: 148.75, usage: 29.8, currBalance: -212.35, prevBalance: -63.60 }, '11': { amt: 162.40, usage: 32.5, currBalance: -374.75, prevBalance: -212.35 }, '12': { amt: 151.80, usage: 30.2, currBalance: -526.55, prevBalance: -374.75 } } },
+  { id: 'BWY-003', merchantName: '洗衣房(水)', meterId: 'WS202309150038', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 3124.08, yearlyUsage: 520.7,
+    monthly: { '01': { amt: 248.60, usage: 41.4, currBalance: 2080.40, prevBalance: 2329.00 }, '02': { amt: 260.30, usage: 43.4, currBalance: 1820.10, prevBalance: 2080.40 }, '03': { amt: 275.80, usage: 46.0, currBalance: 1544.30, prevBalance: 1820.10 }, '04': { amt: 242.50, usage: 40.4, currBalance: 1301.80, prevBalance: 1544.30 }, '05': { amt: 288.40, usage: 48.1, currBalance: 1013.40, prevBalance: 1301.80 }, '06': { amt: 265.20, usage: 44.2, currBalance: 748.20, prevBalance: 1013.40 }, '07': { amt: 280.50, usage: 46.8, currBalance: 467.70, prevBalance: 748.20 }, '08': { amt: 305.30, usage: 50.9, currBalance: 162.40, prevBalance: 467.70 }, '09': { amt: 248.80, usage: 41.5, currBalance: -86.40, prevBalance: 162.40 }, '10': { amt: 235.60, usage: 39.3, currBalance: -322.00, prevBalance: -86.40 }, '11': { amt: 268.90, usage: 44.8, currBalance: -590.90, prevBalance: -322.00 }, '12': { amt: 204.28, usage: 33.9, currBalance: -795.18, prevBalance: -590.90 } } },
+  { id: 'BWY-004', merchantName: '商业街-105', meterId: 'WS202309150052', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 1486.65, yearlyUsage: 297.3,
+    monthly: { '01': { amt: 120.50, usage: 24.1, currBalance: 980.25, prevBalance: 1100.75 }, '02': { amt: 115.80, usage: 23.2, currBalance: 864.45, prevBalance: 980.25 }, '03': { amt: 128.60, usage: 25.7, currBalance: 735.85, prevBalance: 864.45 }, '04': { amt: 112.40, usage: 22.5, currBalance: 623.45, prevBalance: 735.85 }, '05': { amt: 135.20, usage: 27.0, currBalance: 488.25, prevBalance: 623.45 }, '06': { amt: 122.30, usage: 24.5, currBalance: 365.95, prevBalance: 488.25 }, '07': { amt: 130.80, usage: 26.2, currBalance: 235.15, prevBalance: 365.95 }, '08': { amt: 140.50, usage: 28.1, currBalance: 94.65, prevBalance: 235.15 }, '09': { amt: 118.40, usage: 23.7, currBalance: -23.75, prevBalance: 94.65 }, '10': { amt: 125.60, usage: 25.1, currBalance: -149.35, prevBalance: -23.75 }, '11': { amt: 138.20, usage: 27.6, currBalance: -287.55, prevBalance: -149.35 }, '12': { amt: 98.35, usage: 19.6, currBalance: -385.90, prevBalance: -287.55 } } },
+  { id: 'BWY-005', merchantName: '游泳馆', meterId: 'WS202309150067', virtualMeterId: 'WS202309150902', virtualMerchantName: 'B16栋公摊水费',
+    yearlyAmt: 5230.75, yearlyUsage: 872.0,
+    monthly: { '01': { amt: 420.80, usage: 70.1, currBalance: 3120.50, prevBalance: 3541.30 }, '02': { amt: 435.20, usage: 72.5, currBalance: 2685.30, prevBalance: 3120.50 }, '03': { amt: 458.60, usage: 76.4, currBalance: 2226.70, prevBalance: 2685.30 }, '04': { amt: 405.30, usage: 67.6, currBalance: 1821.40, prevBalance: 2226.70 }, '05': { amt: 485.40, usage: 80.9, currBalance: 1336.00, prevBalance: 1821.40 }, '06': { amt: 448.20, usage: 74.7, currBalance: 887.80, prevBalance: 1336.00 }, '07': { amt: 472.60, usage: 78.8, currBalance: 415.20, prevBalance: 887.80 }, '08': { amt: 510.30, usage: 85.1, currBalance: -95.10, prevBalance: 415.20 }, '09': { amt: 420.50, usage: 70.1, currBalance: -515.60, prevBalance: -95.10 }, '10': { amt: 398.40, usage: 66.4, currBalance: -914.00, prevBalance: -515.60 }, '11': { amt: 445.80, usage: 74.3, currBalance: -1359.80, prevBalance: -914.00 }, '12': { amt: 329.65, usage: 55.1, currBalance: -1689.45, prevBalance: -1359.80 } } },
+  { id: 'BWY-006', merchantName: '健身房(水)', meterId: 'WS202309150081', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 2138.52, yearlyUsage: 427.7,
+    monthly: { '01': { amt: 172.45, usage: 34.5, currBalance: 1350.80, prevBalance: 1523.25 }, '02': { amt: 168.20, usage: 33.6, currBalance: 1182.60, prevBalance: 1350.80 }, '03': { amt: 185.60, usage: 37.1, currBalance: 997.00, prevBalance: 1182.60 }, '04': { amt: 160.30, usage: 32.1, currBalance: 836.70, prevBalance: 997.00 }, '05': { amt: 198.40, usage: 39.7, currBalance: 638.30, prevBalance: 836.70 }, '06': { amt: 178.50, usage: 35.7, currBalance: 459.80, prevBalance: 638.30 }, '07': { amt: 186.20, usage: 37.2, currBalance: 273.60, prevBalance: 459.80 }, '08': { amt: 195.80, usage: 39.2, currBalance: 77.80, prevBalance: 273.60 }, '09': { amt: 170.40, usage: 34.1, currBalance: -92.60, prevBalance: 77.80 }, '10': { amt: 180.50, usage: 36.1, currBalance: -273.10, prevBalance: -92.60 }, '11': { amt: 188.20, usage: 37.6, currBalance: -461.30, prevBalance: -273.10 }, '12': { amt: 153.97, usage: 30.8, currBalance: -615.27, prevBalance: -461.30 } } },
+  { id: 'BWY-007', merchantName: '天辰超市(水)', meterId: 'WS201807200201', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 1675.60, yearlyUsage: 304.7,
+    monthly: { '01': { amt: 135.20, usage: 24.6, currBalance: 890.50, prevBalance: 1025.70 }, '02': { amt: 128.50, usage: 23.4, currBalance: 762.00, prevBalance: 890.50 }, '03': { amt: 142.80, usage: 26.0, currBalance: 619.20, prevBalance: 762.00 }, '04': { amt: 125.60, usage: 22.8, currBalance: 493.60, prevBalance: 619.20 }, '05': { amt: 158.30, usage: 28.8, currBalance: 335.30, prevBalance: 493.60 }, '06': { amt: 138.40, usage: 25.2, currBalance: 196.90, prevBalance: 335.30 }, '07': { amt: 145.60, usage: 26.5, currBalance: 51.30, prevBalance: 196.90 }, '08': { amt: 155.20, usage: 28.2, currBalance: -103.90, prevBalance: 51.30 }, '09': { amt: 132.50, usage: 24.1, currBalance: -236.40, prevBalance: -103.90 }, '10': { amt: 140.80, usage: 25.6, currBalance: -377.20, prevBalance: -236.40 }, '11': { amt: 148.60, usage: 27.0, currBalance: -525.80, prevBalance: -377.20 }, '12': { amt: 124.10, usage: 22.5, currBalance: -649.90, prevBalance: -525.80 } } },
+  { id: 'BWY-008', merchantName: '咖啡角(水)', meterId: 'WS201807200315', virtualMeterId: '—', virtualMerchantName: '—',
+    yearlyAmt: 980.45, yearlyUsage: 178.3,
+    monthly: { '01': { amt: 78.50, usage: 14.3, currBalance: 620.30, prevBalance: 698.80 }, '02': { amt: 75.20, usage: 13.7, currBalance: 545.10, prevBalance: 620.30 }, '03': { amt: 82.60, usage: 15.0, currBalance: 462.50, prevBalance: 545.10 }, '04': { amt: 72.30, usage: 13.1, currBalance: 390.20, prevBalance: 462.50 }, '05': { amt: 88.40, usage: 16.1, currBalance: 301.80, prevBalance: 390.20 }, '06': { amt: 80.10, usage: 14.6, currBalance: 221.70, prevBalance: 301.80 }, '07': { amt: 85.30, usage: 15.5, currBalance: 136.40, prevBalance: 221.70 }, '08': { amt: 92.50, usage: 16.8, currBalance: 43.90, prevBalance: 136.40 }, '09': { amt: 78.40, usage: 14.3, currBalance: -34.50, prevBalance: 43.90 }, '10': { amt: 82.80, usage: 15.1, currBalance: -117.30, prevBalance: -34.50 }, '11': { amt: 86.50, usage: 15.7, currBalance: -203.80, prevBalance: -117.30 }, '12': { amt: 77.85, usage: 14.1, currBalance: -281.65, prevBalance: -203.80 } } },
+]
+
+// Legacy compatibility
+export const reportData = {
+  subReports: elecReports,
+  records: dailyRecords,
+}

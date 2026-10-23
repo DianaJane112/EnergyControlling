@@ -1,0 +1,241 @@
+# =============================================================================
+# 生产环境配置 (spring.profiles.active=prod)
+# =============================================================================
+# 使用方式: java -jar energy-platform.jar --spring.profiles.active=prod
+# 启动脚本 start.bat / start.ps1 已内置该参数，无需手动指定。
+#
+# ⚠️ 部署前请确认以下环境变量已正确配置：
+#   - 数据库：DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD
+#   - Redis：REDIS_HOST, REDIS_PORT, REDIS_PASSWORD
+
+#   - JWT 密钥：JWT_WEB_SECRET, JWT_MINIAPP_SECRET（至少 44 字符 Base64）
+
+#   - 微信小程序：WECHAT_APPID, WECHAT_SECRET
+
+#   - 短信服务（如对接）：SMS_PROVIDER, SMS_AK, SMS_SK, SMS_TEMPLATE
+
+#   - 第三方平台：HAOPU_BASE_URL 等
+
+#   - CORS 域名：CORS_ALLOWED_ORIGINS（多个以逗号分隔）
+
+#   - 管理员初始密码：ADMIN_INITIAL_PASSWORD, OPERATOR_INITIAL_PASSWORD
+#     （仅在首次启动且管理员账号不存在时使用。生产环境必须配置！）
+# =============================================================================
+
+# ── 初始管理员/运营人员密码（仅首次启动时生效，通过环境变量注入） ──
+admin:
+  initial-password: ${ADMIN_INITIAL_PASSWORD:}
+operator:
+  initial-password: ${OPERATOR_INITIAL_PASSWORD:}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: energy-management-platform
+  datasource:
+    # ⚠️ 生产数据库连接：请替换为实际的生产环境 MySQL 地址、用户名、密码
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:energy_platform}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      # 连接池配置（HikariCP 默认值大部分已足够，此处显式声明关键参数）
+      minimum-idle: 10
+      maximum-pool-size: 30
+      idle-timeout: 300000        # 5 分钟
+      max-lifetime: 1200000       # 20 分钟
+      connection-timeout: 30000   # 30 秒
+      connection-test-query: SELECT 1
+      pool-name: EnergyPlatformHikariPool
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    # Jackson 3: WRITE_DATES_AS_TIMESTAMPS 已移除，日期默认以 ISO 字符串写出
+    deserialization:
+      fail-on-unknown-properties: false
+    default-property-inclusion: non_null
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 32
+          max-idle: 16
+          min-idle: 8
+          max-wait: 5000ms
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.competition.energycontrollerplatform.entity
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    # 生产环境关闭 SQL 日志，避免日志膨胀
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+# ── JWT 签名密钥（生产环境必须更换，至少 44 字符 Base64） ──
+jwt:
+  # 管理端 JWT 密钥（可通过环境变量 JWT_WEB_SECRET 覆盖）
+  web-secret: ${JWT_WEB_SECRET:}
+  # 小程序端 JWT 密钥（可通过环境变量 JWT_MINIAPP_SECRET 覆盖）
+  miniapp-secret: ${JWT_MINIAPP_SECRET:}
+
+# ── CORS 跨域配置（生产环境必须配置，多个域名以逗号分隔） ──
+# 示例: CORS_ALLOWED_ORIGINS=https://admin.example.com,https://m.example.com
+# 不配置则拒绝所有跨域请求
+cors:
+  # Origin 不包含 /ng/ 路径；环境变量仍可覆盖或追加其他正式来源。
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:https://www.mingsifuwu.com:8086}
+
+# ── Knife4j 接口文档（生产环境强制关闭，不可通过环境变量打开） ──
+springdoc:
+  swagger-ui:
+    path: /doc.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    enabled: false
+  api-docs:
+    path: /v3/api-docs
+    enabled: false
+  group-configs:
+    - group: 1-管理端
+      display-name: 1-管理端接口
+      paths-to-match: /api/**
+      paths-to-exclude: /api/v1/miniapp/**
+      packages-to-scan:
+        - com.competition.energycontrollerplatform.controller
+    - group: 2-小程序
+      display-name: 2-小程序接口
+      paths-to-match: /api/v1/miniapp/**
+      packages-to-scan:
+        - com.competition.energycontrollerplatform.miniapp.controller
+
+# ── 自动计费配置（生产环境） ──
+billing:
+  default-unit-price: 0.85
+  page-size: 100
+  # 生产环境：每天凌晨 2:00 执行一次全量扣费
+  cron: "0 0 2 * * ?"
+
+# ── 日志配置（生产环境） ──
+logging:
+  level:
+    # 业务代码：INFO 级别，只记录关键操作
+    com.competition.energycontrollerplatform: info
+    # Spring 框架：只记录 WARN 及以上，避免框架日志噪音
+    org.springframework.web: warn
+    org.springframework.boot: warn
+    # HikariCP：只记录异常
+    com.zaxxer.hikari: warn
+    # MyBatis：只记录异常
+    org.mybatis: warn
+  file:
+    path: ./logs
+
+# ── Actuator 监控端点 ──
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# ── 小程序配置 ──
+miniapp:
+  wechat:
+    # ⚠️ 生产环境必须替换为真实的小程序 AppID 和 AppSecret
+    appid: ${WECHAT_APPID:}
+    secret: ${WECHAT_SECRET:}
+    # 生产环境不允许缺少配置时静默进入 Mock 登录。
+    mock-enabled: false
+  sms:
+    # 开发模式：true 时跳过短信验证，固定验证码为 000000
+    # 生产环境改为 false，并配置下方 provider 参数
+    dev-mode: ${SMS_DEV_MODE:false}
+    dev-code: "000000"
+    # ⚠️ 短信服务商配置（如对接阿里云/腾讯云短信）
+    provider: ${SMS_PROVIDER:}
+    access-key: ${SMS_AK:}
+    secret-key: ${SMS_SK:}
+    template-id: ${SMS_TEMPLATE:}
+
+# ── 文件存储配置（生产环境） ──
+storage:
+  # 激活的存储后端（通过环境变量 STORAGE_ACTIVE 覆盖，默认 local）
+  active: ${STORAGE_ACTIVE:local}
+  base-url: ${STORAGE_BASE_URL:}
+  max-file-size: 52428800
+  local:
+    # 生产环境建议使用独立的数据盘路径
+    root-path: ${STORAGE_LOCAL_ROOT:/data/uploads}
+    url-prefix: /files
+  oss:
+    # ⚠️ 生产环境必须通过环境变量注入真实凭证
+    endpoint: ${OSS_ENDPOINT:}
+    access-key-id: ${OSS_ACCESS_KEY_ID:}
+    access-key-secret: ${OSS_ACCESS_KEY_SECRET:}
+    bucket-name: ${OSS_BUCKET_NAME:}
+    base-url: ${OSS_BASE_URL:}
+  minio:
+    # ⚠️ 生产环境必须通过环境变量注入真实凭证
+    endpoint: ${MINIO_ENDPOINT:}
+    access-key: ${MINIO_ACCESS_KEY:}
+    secret-key: ${MINIO_SECRET_KEY:}
+    bucket-name: ${MINIO_BUCKET_NAME:}
+    path-style-access: true
+
+# ── 孤儿文件清理任务配置 ──
+orphan-cleanup:
+  # 是否启用孤儿文件清理（默认启用）
+  enabled: true
+  # 清理的 cron 表达式：默认每天凌晨 3:00
+  cron: "0 0 3 * * ?"
+  # 文件超过此小时数未关联业务则视为孤儿（默认 24 小时）
+  retention-hours: 24
+
+# ── 第三方平台集成配置（生产环境） ──
+integration:
+  jicheng:
+    # ⚠️ 生产环境替换为积成平台实际地址
+    base-url: ${JICHENG_BASE_URL:http://39.99.248.52:18080/ws/rsyw}
+    sign: ${JICHENG_SIGN:cddzkd}
+    connect-timeout: 10000
+    read-timeout: 30000
+  jiexian:
+    # ⚠️ 生产环境替换为捷先平台实际地址
+    base-url: ${JIEXIAN_BASE_URL:http://api.camrgo.com/camrgo/interface}
+    company-code: ${JIEXIAN_COMPANY_CODE:0602}
+    connect-timeout: 10000
+    read-timeout: 30000
+    v5-enabled: false
+    v5-base-url: ${JIEXIAN_V5_BASE_URL:https://v5.camrgo.com/api}
+    v5-username1: ${JIEXIAN_V5_USERNAME_1:}
+    v5-password1: ${JIEXIAN_V5_PASSWORD_1:}
+    v5-username2: ${JIEXIAN_V5_USERNAME_2:}
+    v5-password2: ${JIEXIAN_V5_PASSWORD_2:}
+    v5-page-size: ${JIEXIAN_V5_PAGE_SIZE:50}
+    v5-lookback-days: ${JIEXIAN_V5_LOOKBACK_DAYS:2}
+  haopu:
+    # ⚠️ 生产环境替换为皓普平台实际地址和凭证
+    base-url: ${HAOPU_BASE_URL:}
+    app-id: ${HAOPU_APP_ID:}
+    app-secret: ${HAOPU_APP_SECRET:}
+    webhook-signature: ${HAOPU_WEBHOOK_SIGNATURE:}
+    connect-timeout: 10000
+    read-timeout: 30000

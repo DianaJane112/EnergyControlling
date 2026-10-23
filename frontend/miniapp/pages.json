@@ -1,0 +1,134 @@
+{
+	"pages": [
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "",
+				"backgroundColor": "#fff5f0"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "",
+				"backgroundColor": "#f5f5f5"
+			}
+		},
+		{
+			"path": "pages/usage/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "",
+				"backgroundColor": "#f5f5f5"
+			}
+		},
+		{
+			"path": "pages/fee/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "",
+				"backgroundColor": "#f5f5f5"
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "",
+				"backgroundColor": "#fff5f0"
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "pages-sub",
+			"pages": [
+				{
+					"path": "balance/index",
+					"style": {
+						"navigationBarTitleText": "余额查询"
+					}
+				},
+				{
+					"path": "recharge/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "",
+						"backgroundColor": "#f5f5f5"
+					}
+				},
+				{
+					"path": "recharge-history/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "",
+						"backgroundColor": "#f5f5f5"
+					}
+				},
+				{
+					"path": "meter/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "",
+						"backgroundColor": "#f5f5f5"
+					}
+				},
+				{
+					"path": "invoice/index",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "",
+						"backgroundColor": "#f5f5f5"
+					}
+				}
+			]
+		}
+	],
+	"preloadRule": {
+		"pages/index/index": {
+			"network": "all",
+			"packages": ["pages-sub"]
+		}
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "智慧用电",
+		"navigationBarBackgroundColor": "#2563EB",
+		"backgroundColor": "#F5F5F5"
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#ff7a3d",
+		"borderStyle": "black",
+		"backgroundColor": "#FFFFFF",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "/static/tabbar/home.png",
+				"selectedIconPath": "/static/tabbar/home-active.png"
+			},
+			{
+				"pagePath": "pages/fee/index",
+				"text": "账单",
+				"iconPath": "/static/tabbar/bill.png",
+				"selectedIconPath": "/static/tabbar/bill-active.png"
+			},
+			{
+				"pagePath": "pages/usage/index",
+				"text": "用能",
+				"iconPath": "/static/tabbar/usage.png",
+				"selectedIconPath": "/static/tabbar/usage-active.png"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"text": "我的",
+				"iconPath": "/static/tabbar/mine.png",
+				"selectedIconPath": "/static/tabbar/mine-active.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

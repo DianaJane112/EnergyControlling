@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    WaterMeterReportMapper.xml
+    水表报表 SQL 映射文件。
+
+    数据来源：
+      - t_meter            表计主表（水电共用，通过 meter_type=0 筛选水表）
+      - t_meter_reading    表计读数流水表（水电共用，字段 timestamp + kwh）
+      - t_customer         商户表（LEFT JOIN 获取商户名称）
+
+    修改日期：2026-06-16
+    修改内容：表名从 t_water_meter/t_water_meter_reading 修正为 t_meter/t_meter_reading，
+             字段名对齐真实 schema，添加 meter_type=0 水表筛选。
+-->
+<mapper namespace="com.competition.energycontrollerplatform.mapper.WaterMeterReportMapper">
+
+    <!--
+        ============================================================
+        1. 用水量日报表明细（按「天 + 水表」维度）
+           - 返回每天每台水表的用水量
+           - 支持日期范围、商户ID、商户名模糊搜索、设备号筛选
+        ============================================================
+    -->
+    <select id="selectDailyDetail" resultType="java.util.Map">
+        SELECT
+            DATE(wr.timestamp)       AS statDate,
+            wm.id                    AS meterId,
+            wm.customer_id           AS merchantId,
+            c.customer_name          AS merchantName,
+            COALESCE(NULLIF(wm.meteraddress, ''), wm.steal_no) AS deviceNo,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+        LEFT JOIN t_customer c ON wm.customer_id = c.id
+
+        WHERE 1=1
+            <if test="startDate != null">
+                AND wr.timestamp &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND wr.timestamp &lt; #{endDate}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                AND c.customer_name LIKE CONCAT('%', #{merchantName}, '%')
+            </if>
+            <if test="deviceNo != null and deviceNo != ''">
+                AND wm.meteraddress = #{deviceNo}
+            </if>
+
+        GROUP BY
+            DATE(wr.timestamp),
+            wm.id,
+            wm.customer_id,
+            c.customer_name,
+            wm.meteraddress
+
+        ORDER BY statDate DESC, totalUsage DESC
+    </select>
+
+
+    <!--
+        ============================================================
+        2. 用水量日报表汇总（按「天」维度聚合，不区分设备）
+           - 返回每天的总用水量与参与统计的水表数量
+        ============================================================
+    -->
+    <select id="sumDaily" resultType="java.util.Map">
+        SELECT
+            DATE(wr.timestamp)       AS statDate,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="startDate != null">
+                AND wr.timestamp &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND wr.timestamp &lt; #{endDate}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+            <if test="deviceNo != null and deviceNo != ''">
+                AND wm.meteraddress = #{deviceNo}
+            </if>
+
+        GROUP BY DATE(wr.timestamp)
+        ORDER BY statDate DESC
+    </select>
+
+
+    <!--
+        ============================================================
+        3. 用水量月报表明细（按「月 + 水表」维度）
+           - 返回每月每台水表的用水量
+        ============================================================
+    -->
+    <select id="selectMonthlyDetail" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y-%m') AS statMonth,
+            wm.id                    AS meterId,
+            wm.customer_id           AS merchantId,
+            c.customer_name          AS merchantName,
+            COALESCE(NULLIF(wm.meteraddress, ''), wm.steal_no) AS deviceNo,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT DATE(wr.timestamp)) AS dailyCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+        LEFT JOIN t_customer c ON wm.customer_id = c.id
+
+        WHERE 1=1
+            <if test="statMonth != null and statMonth != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y-%m') = #{statMonth}
+            </if>
+            <if test="statYear != null and statYear != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y') = #{statYear}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                AND c.customer_name LIKE CONCAT('%', #{merchantName}, '%')
+            </if>
+            <if test="deviceNo != null and deviceNo != ''">
+                AND wm.meteraddress = #{deviceNo}
+            </if>
+
+        GROUP BY
+            DATE_FORMAT(wr.timestamp, '%Y-%m'),
+            wm.id,
+            wm.customer_id,
+            c.customer_name,
+            wm.meteraddress
+
+        ORDER BY statMonth DESC, totalUsage DESC
+    </select>
+
+
+    <!--
+        ============================================================
+        4. 用水量月报表汇总（按「月」维度聚合，不区分设备）
+           - 返回每月的总用水量与参与统计的水表数
+        ============================================================
+    -->
+    <select id="sumMonthly" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y-%m') AS statMonth,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount,
+            COUNT(DISTINCT DATE(wr.timestamp)) AS dailyCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="statMonth != null and statMonth != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y-%m') = #{statMonth}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+            <if test="deviceNo != null and deviceNo != ''">
+                AND wm.meteraddress = #{deviceNo}
+            </if>
+
+        GROUP BY DATE_FORMAT(wr.timestamp, '%Y-%m')
+        ORDER BY statMonth DESC
+    </select>
+
+
+    <!--
+        ============================================================
+        5. 用水量月报表（已删除表计）
+           - 查询 is_deleted=1 的表计（含水表+电表）在历史月份中的用量
+           - 不限制 meter_type，已删除的水表和电表都会返回
+           - 绕过 MyBatis-Plus @TableLogic 插件：自定义 XML SQL 不会被拦截
+        ============================================================
+    -->
+    <select id="selectDeletedMeterMonthly" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y-%m') AS statMonth,
+            wm.id                    AS meterId,
+            wm.customer_id           AS merchantId,
+            c.customer_name          AS merchantName,
+            COALESCE(NULLIF(wm.meteraddress, ''), wm.steal_no) AS deviceNo,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT DATE(wr.timestamp)) AS dailyCount,
+            DATE(wm.update_time)     AS deletedTime,
+            'READING'                AS dataSource
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND wm.is_deleted = 1
+        LEFT JOIN t_customer c ON wm.customer_id = c.id
+
+        WHERE 1=1
+            <if test="statMonth != null and statMonth != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y-%m') = #{statMonth}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+            <if test="merchantName != null and merchantName != ''">
+                AND c.customer_name LIKE CONCAT('%', #{merchantName}, '%')
+            </if>
+            <if test="deviceNo != null and deviceNo != ''">
+                AND wm.meteraddress = #{deviceNo}
+            </if>
+
+        GROUP BY
+            DATE_FORMAT(wr.timestamp, '%Y-%m'),
+            wm.id,
+            wm.customer_id,
+            c.customer_name,
+            wm.meteraddress,
+            DATE(wm.update_time)
+
+        ORDER BY statMonth DESC, totalUsage DESC
+    </select>
+
+
+    <!--
+        ============================================================
+        6. 全园区月度用水量汇总（管理层宏观视角）
+           - 不区分水表/商户，按自然月统计园区总用水量
+           - X轴: statMonth, Y轴: totalUsage
+        ============================================================
+    -->
+    <select id="sumCampusMonthly" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y-%m') AS statMonth,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount,
+            COUNT(DISTINCT DATE(wr.timestamp)) AS dailyCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="statYear != null and statYear != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y') = #{statYear}
+            </if>
+            <if test="startDate != null">
+                AND wr.timestamp &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND wr.timestamp &lt; #{endDate}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+
+        GROUP BY DATE_FORMAT(wr.timestamp, '%Y-%m')
+        ORDER BY statMonth ASC
+    </select>
+
+
+    <!--
+        ============================================================
+        7. 全园区年度用水量汇总（管理层宏观视角）
+           - 不区分水表/商户，按自然年统计园区总用水量
+           - X轴: statYear, Y轴: totalUsage
+        ============================================================
+    -->
+    <select id="sumCampusYearly" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y') AS statYear,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount,
+            COUNT(DISTINCT DATE_FORMAT(wr.timestamp, '%Y-%m')) AS monthCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="startDate != null">
+                AND wr.timestamp &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND wr.timestamp &lt; #{endDate}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+
+        GROUP BY DATE_FORMAT(wr.timestamp, '%Y')
+        ORDER BY statYear ASC
+    </select>
+
+
+    <!--
+        ============================================================
+        8. 计费水量汇总表（财务视角 — 按天聚合）
+           - 按天 SUM(kwh)，Service 层用 totalFee ÷ totalUsage 计算平均单价
+        ============================================================
+    -->
+    <select id="sumBillingDaily" resultType="java.util.Map">
+        SELECT
+            DATE(wr.timestamp)       AS statDate,
+            COALESCE(SUM(COALESCE(wr.read_val, wr.data_value0, wr.kwh)), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="startDate != null">
+                AND wr.timestamp &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND wr.timestamp &lt; #{endDate}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+
+        GROUP BY DATE(wr.timestamp)
+        ORDER BY statDate ASC
+    </select>
+
+
+    <!--
+        ============================================================
+        9. 计费水量月报表（财务视角 — 按月聚合）
+           - 按月 SUM(kwh)，平均单价 = 月总费用 ÷ 月总用量
+        ============================================================
+    -->
+    <select id="sumBillingMonthly" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y-%m') AS statMonth,
+            COALESCE(SUM(wr.kwh), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount,
+            COUNT(DISTINCT DATE(wr.timestamp)) AS dailyCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="statMonth != null and statMonth != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y-%m') = #{statMonth}
+            </if>
+            <if test="statYear != null and statYear != ''">
+                AND DATE_FORMAT(wr.timestamp, '%Y') = #{statYear}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+
+        GROUP BY DATE_FORMAT(wr.timestamp, '%Y-%m')
+        ORDER BY statMonth ASC
+    </select>
+
+
+    <!--
+        ============================================================
+        10. 计费水量年报表（财务视角 — 按年聚合）
+           - 按年 SUM(kwh)，平均单价 = 年总费用 ÷ 年总用量
+        ============================================================
+    -->
+    <select id="sumBillingYearly" resultType="java.util.Map">
+        SELECT
+            DATE_FORMAT(wr.timestamp, '%Y') AS statYear,
+            COALESCE(SUM(wr.kwh), 0) AS totalUsage,
+            0                        AS totalFee,
+            COUNT(DISTINCT wr.meter_id) AS meterCount,
+            COUNT(DISTINCT DATE_FORMAT(wr.timestamp, '%Y-%m')) AS monthCount
+        FROM t_meter_reading wr
+        INNER JOIN t_meter wm ON wr.meter_id = wm.id
+                              AND (wm.meter_type = 0
+                                   OR (wm.meter_type IS NULL AND wm.meteraddress IS NOT NULL AND wm.meteraddress != ''))
+                              AND wm.is_deleted = 0
+
+        WHERE 1=1
+            <if test="startDate != null">
+                AND wr.timestamp &gt;= #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND wr.timestamp &lt; #{endDate}
+            </if>
+            <if test="merchantId != null">
+                AND wm.customer_id = #{merchantId}
+            </if>
+
+        GROUP BY DATE_FORMAT(wr.timestamp, '%Y')
+        ORDER BY statYear ASC
+    </select>
+
+</mapper>

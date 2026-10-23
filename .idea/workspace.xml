@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackgroundAgentGlobalSettings">
+    <option name="selectedModelId" value="auto" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca7e8c4a-cfff-4d35-9c2c-c1594c3bcf0e" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/dist/assets/RechargeDetails-BxTwuA-T.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/dist/assets/RechargeDetails-BxTwuA-T.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/dist/icons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/dist/icons.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/dist/loginBg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/public/favicon_1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/public/icons_1.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/App_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/auth_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/bankAccount_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/billCategory_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/bill_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/collector_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/dashboard_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/finance_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/instantBill_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/manualPayment_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/merchants_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/meterGroup_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/meterReport_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/meters.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/meters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/meters_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/priceStrategy_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/publicAllocation_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/report_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/request_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/shadowMeter.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/shadowMeter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/shadowMeter_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/api/waterReport_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/assets/login-bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/ReportFilter_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/charts/BarChart_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/charts/StackedBarChart_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/common/TreeNode_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/DataTable_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/EmptyState_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/SearchFilterBar_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/StatsCard_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/StatusBadge_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/SummaryBar_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/data/TablePagination_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/feedback/ContextMenu_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/feedback/Drawer_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/feedback/FabButton_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/DatePicker_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/DateRangePicker_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/DropdownSelect_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/FormInput_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/FormSelect_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/MonthPicker_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/PeriodPicker_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/SearchInput_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/forms/YearPicker_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/meters/MeterQrCodeModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/meters/MeterQrCodeModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/navigation/Breadcrumbs_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/project/ProjectTree_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/shell/PageFooter_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/shell/SideNavBar_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/shell/TabsBar_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/components/shell/TopAppBar_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/config/ReportColumns.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/smart-utility-system/src/config/ReportColumns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/config/ReportColumns_2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/config/navigation_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/config/reportColumns_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/layouts/DefaultLayout_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/main_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/mock/billing_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/mock/dashboard_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/mock/merchant_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/mock/meters_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/mock/operations_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/router/index_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/stores/auth_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/style_1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/utils/export_1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BalanceAdjustment_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BillingElecMonthlyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BillingElecSummaryReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BillingElecYearlyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BillingWaterMonthlyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BillingWaterSummaryReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/BillingWaterYearlyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/CommonElecReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/DashboardView_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/DeletedMeterList_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/ElectricLoadQuery_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/EnergyTrend_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/GroupConfig_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/InstantBill_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/LoginView_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/ManualPayment_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/MerchantManagement_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/MonthlyElecSummaryReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/MultiRateDailyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/MultiRateSummaryReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/PhysicalMeterList_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/PublicAllocation_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/RechargeDetails_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/RechargeStatsView_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/RefundDetails_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/ReportCenter_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/SplitAccountDetails_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/SplitAccountStats_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/StationManagement_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/VirtualMeterList_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterBalanceAdjustment_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterDailyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterDeletedMeterReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterDeletedMeter_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterManualPayment_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterMeterManagement_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterMonthlyReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterMonthlySummaryReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterStationManagement_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterVirtualMeter_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/WaterYearlySummaryReport_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/smart-utility-system/src/views/YearlyElecSummaryReport_1.vue" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/Diana/Desktop/能耗管理平台/EnergyControllerPlatform" value="3DwgjQpdeQ0yQKiCRuA5M5YZ991" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend/smart-utility-system" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;state&quot;: &quot;OPEN&quot;,
+      &quot;assignee&quot;: &quot;DianaJane112&quot;,
+      &quot;sort&quot;: &quot;MOST_COMMENTED&quot;
+    }
+  ],
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DianaJane112&quot;,
+    &quot;sort&quot;: &quot;MOST_COMMENTED&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/makesense66/smart-utility-system.git&quot;,
+    &quot;accountId&quot;: &quot;44131555-f530-4e35-b821-e3a7869d81ce&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/frontend/main/src/api/report_1.js" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\Develop\apache-maven-3.9.12\mvn_repo" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="userSettingsFile" value="D:\Develop\apache-maven-3.9.12\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="25" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3DwgjQpdeQ0yQKiCRuA5M5YZ991" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Agent" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="BACKGROUND" />
+      </template>
+    </option>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;发现新的/更新的数据库配置&quot;,
+    &quot;Notification.DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.EnergyControllerPlatformApplication.executor&quot;: &quot;Run&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;frontend-update&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.x0x0b.codexlauncher.settings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Javaproject\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.TcpSimulatorTest.executor&quot;: &quot;Run&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Diana\Desktop\能耗管理平台\EnergyControllerPlatform\backend\src\main\java\competition" />
+      <recent name="C:\Users\Diana\Desktop\能耗管理平台\EnergyControllerPlatform\frontend\src\api" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.EnergyControllerPlatformApplication">
+    <configuration name="TcpSimulatorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.competition.energycontrollerplatform.tcp.TcpSimulatorTest" />
+      <module name="EnergyControllerPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.competition.energycontrollerplatform.tcp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EnergyControllerPlatformApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="EnergyControllerPlatform" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.competition.energycontrollerplatform.EnergyControllerPlatformApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.TcpSimulatorTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="StructureViewState">
+    <option name="selectedTab" value="逻辑" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="ca7e8c4a-cfff-4d35-9c2c-c1594c3bcf0e" name="更改" comment="" />
+      <created>1779198681151</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779198681151</updated>
+      <workItem from="1779198682129" duration="4728000" />
+      <workItem from="1779501055430" duration="1141000" />
+      <workItem from="1779555744993" duration="2000" />
+      <workItem from="1779683741862" duration="2000" />
+      <workItem from="1779781012543" duration="5202000" />
+      <workItem from="1780051377268" duration="1620000" />
+      <workItem from="1780102656124" duration="29860000" />
+      <workItem from="1780226279047" duration="9600000" />
+      <workItem from="1780237634452" duration="12491000" />
+      <workItem from="1780376569768" duration="1105000" />
+      <workItem from="1780401295033" duration="7684000" />
+      <workItem from="1780467297219" duration="1620000" />
+      <workItem from="1780469489390" duration="19273000" />
+      <workItem from="1780497349884" duration="1504000" />
+      <workItem from="1780657220821" duration="3124000" />
+      <workItem from="1780710628874" duration="35763000" />
+      <workItem from="1780989370309" duration="5025000" />
+      <workItem from="1780994741702" duration="19158000" />
+      <workItem from="1781086709167" duration="2606000" />
+      <workItem from="1781089685819" duration="35065000" />
+      <workItem from="1781182013334" duration="24975000" />
+      <workItem from="1781353426879" duration="11607000" />
+      <workItem from="1781503553538" duration="68619000" />
+      <workItem from="1781705355135" duration="19804000" />
+      <workItem from="1781758094521" duration="8000" />
+      <workItem from="1781758594565" duration="73000" />
+      <workItem from="1781758917254" duration="2000" />
+      <workItem from="1781759028678" duration="2156000" />
+      <workItem from="1781761198474" duration="6254000" />
+      <workItem from="1781767828494" duration="509000" />
+      <workItem from="1783441747683" duration="83000" />
+      <workItem from="1784021535220" duration="4304000" />
+      <workItem from="1784079934486" duration="70000" />
+      <workItem from="1784080022495" duration="13488000" />
+      <workItem from="1785053841737" duration="5331000" />
+      <workItem from="1786963725744" duration="66000" />
+      <workItem from="1787024534185" duration="100052000" />
+      <workItem from="1788055384188" duration="6000" />
+      <workItem from="1788157819704" duration="59444000" />
+      <workItem from="1788417394136" duration="15870000" />
+      <workItem from="1788485254755" duration="15979000" />
+      <workItem from="1788542238547" duration="16216000" />
+      <workItem from="1789027993179" duration="15214000" />
+      <workItem from="1789461963097" duration="1047000" />
+      <workItem from="1789809005875" duration="33415000" />
+      <workItem from="1790071036783" duration="2068000" />
+      <workItem from="1790073360138" duration="1566000" />
+      <workItem from="1790084479783" duration="2000" />
+      <workItem from="1790084656384" duration="1063000" />
+      <workItem from="1790562755852" duration="5000" />
+      <workItem from="1791446408963" duration="5736000" />
+      <workItem from="1791620721003" duration="1315000" />
+      <workItem from="1791881479488" duration="4000" />
+      <workItem from="1791950990172" duration="2000" />
+      <workItem from="1792483804145" duration="3000" />
+      <workItem from="1792667469440" duration="18000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
